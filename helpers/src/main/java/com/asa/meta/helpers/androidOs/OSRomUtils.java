@@ -22,6 +22,10 @@ public class OSRomUtils {
     public static final String SYS_HTC = "sys_htc";
     public static final String SYS_LETV = "sys_letv";
     public static final String SYS_COOLPAD = "sys_coolpad";
+    public static final String SYS_LENOVO = "sys_lenovo";
+    public static final String SYS_GIONEE = "sys_gionee";
+    public static final String SYS_LG = "sys_lg";
+    public static final String SYS_360= "sys_360";
 
     //小米
     private static final String KEY_MIUI_VERSION_CODE = "ro.miui.ui.version.code";
@@ -152,6 +156,14 @@ public class OSRomUtils {
             SYS = SYS_LETV; //乐视 估计要倒闭
         }else if (hasEvidence(KEY_YULONG_VERSION_RELEASE,KEY_YULONG_VERSION_TAG)) {
             SYS = SYS_COOLPAD; //酷派
+        }else if (hasEvidence(KEY_AMIGO_ROM_VERSION,KEY_AMIGO_SYSTEM_UI_SUPPORT,VALUE_AMIGO_DISPLAY_ID_CONTAIN)) {
+            SYS = SYS_GIONEE; //金立
+        }else if (hasEvidence(KEY_LENOVO_DEVICE,KEY_LENOVO_PLATFORM,KEY_LENOVO_ADB)) {
+            SYS = SYS_LENOVO; //联想
+        }else if (hasEvidence(KEY_LG_SW_VERSION,KEY_LG_SW_VERSION_SHORT,KEY_LG_FACTORY_VERSION)) {
+            SYS = SYS_LG; //LG
+        }else if (Build.MANUFACTURER.contains("QIKU") ||Build.MANUFACTURER.contains("360")) {
+            SYS = SYS_360; //LG
         }
         return SYS;
 
