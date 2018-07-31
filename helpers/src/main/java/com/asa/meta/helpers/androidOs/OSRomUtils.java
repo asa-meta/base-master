@@ -163,7 +163,7 @@ public class OSRomUtils {
         }else if (hasEvidence(KEY_LG_SW_VERSION,KEY_LG_SW_VERSION_SHORT,KEY_LG_FACTORY_VERSION)) {
             SYS = SYS_LG; //LG
         }else if (Build.MANUFACTURER.contains("QIKU") ||Build.MANUFACTURER.contains("360")) {
-            SYS = SYS_360; //LG
+            SYS = SYS_360; //
         }
         return SYS;
 

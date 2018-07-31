@@ -19,7 +19,7 @@ public class NotifySettingUtils {
         if (Build.VERSION.SDK_INT >= 19) {
             return NotificationManagerCompat.from(context).areNotificationsEnabled();
         } else {
-            return false;
+            return true;
         }
 
     }

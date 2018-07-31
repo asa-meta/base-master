@@ -73,16 +73,21 @@ public class MainActivity extends AppCompatActivity implements ProgressDialog {
                         NotifyController.notifyProgressFail(notifyHelper, e.getMessage()).notifyProgressEnd();
                     }
 
+                    private int cacheProgress;
                     @Override
                     public void update(long bytesRead, long contentLength, boolean done) {
                         int progress = (int) (bytesRead * 100 / contentLength);
+                        if (cacheProgress == progress && contentLength != 100) {
+                            return;
+                        }
+
+                        cacheProgress = progress;
                         HttpLog.e(progress + "% ");
                         NotifyController.notifyProgressIng(notifyHelper).notifyProgress(progress);
-                        mBinding.btnDownload.setText(progress+"%");
+                        mBinding.btnDownload.setText(progress + "%");
                         if (done) {//下载完成
                             HttpLog.e("下载完成");
-                            mBinding.btnDownload.setText("下载完成:点击重新下载");
-                            NotifyController.notifyProgressEnd(notifyHelper).notifyProgressEnd();
+
                         }
                     }
 
@@ -91,6 +96,8 @@ public class MainActivity extends AppCompatActivity implements ProgressDialog {
                         HttpLog.e("保存的路径" + path);
                         File file = new File(path);
                         if (FileUtils.checkFile(file) && InstallApkUtils.checkApkFile(mContext, file.getPath())) {
+                            mBinding.btnDownload.setText("下载完成:点击重新下载");
+                            NotifyController.notifyProgressEnd(notifyHelper, mContext, file).notifyProgressEnd();
                             InstallApkUtils.install(mContext, file);
                         }
 
@@ -193,6 +200,9 @@ public class MainActivity extends AppCompatActivity implements ProgressDialog {
             NotifyController.notifyTest2(context, "测试1", "测试：" + i);
         }
 
+        public void checkNotify(View view) {
+            mBinding.btnCheckNotify.setText("是否有通知权限：" + NotifySettingUtils.hasNotifyPermission(context));
+        }
 
         public void onClickNotify2(View view) {
             NotifyController.notifyTest3(context, "测试2", "鸟儿啄完稻谷，轻轻梳理着光润的羽毛。\n" +

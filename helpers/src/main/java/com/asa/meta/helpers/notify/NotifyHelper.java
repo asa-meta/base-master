@@ -14,9 +14,6 @@ import android.support.v4.app.NotificationCompat;
 
 import com.asa.meta.helpers.androidOs.OSRomUtils;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class NotifyHelper {
     private Context mContext;
     private int notificationId;
@@ -24,7 +21,7 @@ public class NotifyHelper {
     private NotificationCompat.Builder mBuilder;
     private NotificationManager notificationManager;
     private static final String LOG_TAG = "NotifyHelper";
-    private static Map<String, String> mChannelMap = new HashMap<>();
+
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public static NotificationChannel buildDefaultChannel(String channelId, String channelName) {
@@ -83,6 +80,9 @@ public class NotifyHelper {
         mBuilder.setContentText(notifyInfo.getContent());
         mBuilder.setAutoCancel(true);
         mBuilder.setVibrate(new long[]{0});
+        if (notifyInfo.color > 0) {
+            mBuilder.setColor(notifyInfo.color);
+        }
         return this;
     }
 
@@ -98,6 +98,10 @@ public class NotifyHelper {
         mBuilder.setContentTitle(notifyInfo.getTitle());
         mBuilder.setContentText(notifyInfo.getContent());
         mBuilder.setAutoCancel(true);
+        if (notifyInfo.color > 0) {
+            mBuilder.setColor(notifyInfo.color);
+        }
+
         int defaults = 0;
 
         if (notifyInfo.isSound()) {
@@ -167,6 +171,17 @@ public class NotifyHelper {
         private boolean isVibrate = true;
         private boolean isLights = true;
         private String content = "";
+
+        private int color;
+
+        public int getColor() {
+            return color;
+        }
+
+        public NotifyInfo setColor(int color) {
+            this.color = color;
+            return this;
+        }
 
         public PendingIntent getPendingIntent() {
             return pendingIntent;
