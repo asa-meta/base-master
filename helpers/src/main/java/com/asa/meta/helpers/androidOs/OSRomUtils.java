@@ -16,6 +16,12 @@ public class OSRomUtils {
     public static final String SYS_MIUI = "sys_miui";
     public static final String SYS_FLYME = "sys_flyme";
     public static final String SYS_OPPO = "sys_oppo";
+    public static final String SYS_VIVO = "sys_vivo";
+    public static final String SYS_SAMSUNG = "sys_samsung";
+    public static final String SYS_SONY = "sys_sony";
+    public static final String SYS_HTC = "sys_htc";
+    public static final String SYS_LETV = "sys_letv";
+    public static final String SYS_COOLPAD = "sys_coolpad";
 
     //小米
     private static final String KEY_MIUI_VERSION_CODE = "ro.miui.ui.version.code";
@@ -31,7 +37,6 @@ public class OSRomUtils {
     private static final String KEY_COLOROS_THEME_VERSION = "ro.oppo.version"; // ""
     private static final String KEY_COLOROS_ROM_VERSION = "ro.rom.different.version"; // "ColorOS2.1"
 
-
     // vivo : FuntouchOS
     private static final String KEY_FUNTOUCHOS_BOARD_VERSION = "ro.vivo.board.version"; // "MD"
     private static final String KEY_FUNTOUCHOS_OS_NAME = "ro.vivo.os.name"; // "Funtouch"
@@ -39,11 +44,10 @@ public class OSRomUtils {
     private static final String KEY_FUNTOUCHOS_DISPLAY_ID = "ro.vivo.os.build.display.id"; // "FuntouchOS_3.0"
     private static final String KEY_FUNTOUCHOS_ROM_VERSION = "ro.vivo.rom.version"; // "rom_3.1"
 
-
     // 魅族 : Flyme
     private static final String KEY_FLYME_PUBLISHED = "ro.flyme.published"; // "true"
     private static final String KEY_FLYME_SETUP = "ro.meizu.setupwizard.flyme"; // "true"
-    private static final String VALUE_FLYME_DISPLAY_ID_CONTAIN = "Flyme"; // "Flyme OS 4.5.4.2U"
+    private static final String VALUE_FLYME_DISPLAY_ID_CONTAIN = "flyme"; // "Flyme OS 4.5.4.2U"
 
     // Samsung
     private static final String VALUE_SAMSUNG_BASE_OS_VERSION_CONTAIN = "samsung";
@@ -58,7 +62,7 @@ public class OSRomUtils {
     private static final String KEY_EUI_NAME = "ro.product.letv_name"; // "乐1s"
     private static final String KEY_EUI_MODEL = "ro.product.letv_model"; // "Letv X500"
 
-    // 酷派 : yulong
+    // 酷派 : yulong Coolpad
     private static final String KEY_YULONG_VERSION_RELEASE = "ro.yulong.version.release"; // "5.1.046.P1.150921.8676_M01"
     private static final String KEY_YULONG_VERSION_TAG = "ro.yulong.version.tag"; // "LC"
 
@@ -99,53 +103,63 @@ public class OSRomUtils {
         return getSystemInfo().getOs();
     }
 
-    public static String getSystem() {
-        String SYS = Build.BRAND;
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.N_MR1) {
-            if (!TextUtils.isEmpty(getSystemProperty(KEY_MIUI_VERSION_CODE, ""))
-                    || !TextUtils.isEmpty(getSystemProperty(KEY_MIUI_VERSION_NAME, ""))
-                    || !TextUtils.isEmpty(getSystemProperty(KEY_MIUI_INTERNAL_STORAGE, ""))) {
-                SYS = SYS_MIUI;//小米
-            } else if (!TextUtils.isEmpty(getSystemProperty(KEY_EMUI_API_LEVEL, ""))
-                    || !TextUtils.isEmpty(getSystemProperty(KEY_EMUI_VERSION, ""))
-                    || !TextUtils.isEmpty(getSystemProperty(KEY_EMUI_CONFIG_HW_SYS_VERSION, ""))) {
-                SYS = SYS_EMUI;//华为
-            } else if (getMeizuFlymeOSFlag().toLowerCase().contains("flyme")) {
-                SYS = SYS_FLYME;//魅族
-            } else if (!TextUtils.isEmpty(getSystemProperty(KEY_OPPO_VERSION, ""))) {
-                SYS = SYS_OPPO;
+    public static boolean hasEvidence(String... evidenceList) {
+        if (OSRomUtils.isAndroid6()) {
+            for (String evidence : evidenceList) {
+                if (!TextUtils.isEmpty(getSystemProperty(evidence, ""))) {
+                    return true;
+                }
             }
-            return SYS;
+
         } else {
             try {
                 Properties prop = new Properties();
                 prop.load(new FileInputStream(new File(Environment.getRootDirectory(), "build.prop")));
-                if (prop.getProperty(KEY_MIUI_VERSION_CODE, null) != null
-                        || prop.getProperty(KEY_MIUI_VERSION_NAME, null) != null
-                        || prop.getProperty(KEY_MIUI_INTERNAL_STORAGE, null) != null) {
-                    SYS = SYS_MIUI;//小米
-                } else if (prop.getProperty(KEY_EMUI_API_LEVEL, null) != null
-                        || prop.getProperty(KEY_EMUI_VERSION, null) != null
-                        || prop.getProperty(KEY_EMUI_CONFIG_HW_SYS_VERSION, null) != null) {
-                    SYS = SYS_EMUI;//华为
-                } else if (getMeizuFlymeOSFlag().toLowerCase().contains("flyme")) {
-                    SYS = SYS_FLYME;//魅族
-                } else if (prop.getProperty(KEY_OPPO_VERSION, null) != null) {
-                    SYS = SYS_OPPO;
+                for (String evidence : evidenceList) {
+                    if (!TextUtils.isEmpty(prop.getProperty(evidence, null))) {
+                        return true;
+                    }
                 }
             } catch (IOException e) {
                 e.printStackTrace();
-                return SYS;
-            } finally {
-                return SYS;
+                return false;
             }
+
         }
+        return false;
+    }
+
+    public static String getSystem() {
+        String SYS = Build.BRAND;
+
+        if (hasEvidence(KEY_MIUI_VERSION_CODE, KEY_MIUI_VERSION_NAME, KEY_MIUI_INTERNAL_STORAGE)) {
+            SYS = SYS_MIUI;//小米
+        } else if (hasEvidence(KEY_EMUI_API_LEVEL, KEY_EMUI_VERSION, KEY_EMUI_CONFIG_HW_SYS_VERSION)) {
+            SYS = SYS_EMUI;//华为
+        } else if (getMeizuFlymeOSFlag().toLowerCase().contains(VALUE_FLYME_DISPLAY_ID_CONTAIN) || hasEvidence(KEY_FLYME_PUBLISHED, KEY_FLYME_SETUP)) {
+            SYS = SYS_FLYME;//魅族
+        } else if (hasEvidence(KEY_OPPO_VERSION, KEY_COLOROS_VERSION, KEY_COLOROS_THEME_VERSION, KEY_COLOROS_ROM_VERSION)) {
+            SYS = SYS_OPPO; //oppp
+        } else if (hasEvidence(KEY_FUNTOUCHOS_BOARD_VERSION, KEY_FUNTOUCHOS_OS_NAME, KEY_FUNTOUCHOS_OS_VERSION, KEY_FUNTOUCHOS_DISPLAY_ID, KEY_FUNTOUCHOS_ROM_VERSION)) {
+            SYS = SYS_VIVO;//vivo
+        } else if (hasEvidence(VALUE_SAMSUNG_BASE_OS_VERSION_CONTAIN)) {
+            SYS = SYS_SAMSUNG; //三星
+        } else if (hasEvidence(KEY_SONY_PROTOCOL_TYPE,KEY_SONY_ENCRYPTED_DATA)) {
+            SYS = SYS_SONY; //索尼
+        } else if (hasEvidence(KEY_SENSE_BUILD_STAGE,KEY_SENSE_BLUETOOTH_SAP)) {
+            SYS = SYS_HTC; //HTC
+        } else if (hasEvidence(KEY_EUI_VERSION,KEY_EUI_VERSION_DATE,KEY_EUI_NAME,KEY_EUI_MODEL)) {
+            SYS = SYS_LETV; //乐视 估计要倒闭
+        }else if (hasEvidence(KEY_YULONG_VERSION_RELEASE,KEY_YULONG_VERSION_TAG)) {
+            SYS = SYS_COOLPAD; //酷派
+        }
+        return SYS;
+
     }
 
     private static String getMeizuFlymeOSFlag() {
         return getSystemProperty("ro.build.display.id", "");
     }
-
 
     private static String getSystemProperty(String key, String defaultValue) {
         try {
@@ -169,7 +183,7 @@ public class OSRomUtils {
         return getOSRomType().equals(SYS_OPPO);
     }
 
-    public static class SystemInfo {
+    public static final class SystemInfo {
         private String os = "android";
         private String versionName = Build.VERSION.RELEASE;
         private int versionCode = Build.VERSION.SDK_INT;
@@ -190,14 +204,14 @@ public class OSRomUtils {
         public String toString() {
             return
                     "os='" + os + '\'' +
-                    ", \nversionName='" + versionName + '\'' +
-                    ", \nversionCode=" + versionCode
-                   ;
+                            ", \nversionName='" + versionName + '\'' +
+                            ", \nversionCode=" + versionCode
+                    ;
         }
     }
 
-    public static boolean isOSMore8() {
-        return Build.VERSION.SDK_INT >= 26;
+    public static boolean isAndroid9() {
+        return Build.VERSION.SDK_INT >= 28;
     }
 
     public static boolean isAndroid8() {
@@ -216,7 +230,16 @@ public class OSRomUtils {
         return Build.VERSION.SDK_INT >= 24;
     }
 
+    public static boolean isAndroid6() {
+        return Build.VERSION.SDK_INT >= 23;
+    }
+
     public static boolean isAndroid5() {
         return Build.VERSION.SDK_INT >= 21;
     }
+
+    public static boolean isAndroid5_re1() {
+        return Build.VERSION.SDK_INT >= 22;
+    }
+
 }

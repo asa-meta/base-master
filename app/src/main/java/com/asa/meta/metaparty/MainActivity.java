@@ -157,6 +157,10 @@ public class MainActivity extends AppCompatActivity implements ProgressDialog {
             this.context = context;
         }
 
+        public void check(View view){
+            ToastUtils.showToast("手机版本信息：" + OSRomUtils.getSystemInfo().toString());
+        }
+
         public void onClickXiaoMi(View view) {
             if (!OSRomUtils.getSystem().equals(OSRomUtils.SYS_MIUI)) {
                 ToastUtils.showToast("不是小米手机，这个手机是：" + OSRomUtils.getSystemInfo().toString());

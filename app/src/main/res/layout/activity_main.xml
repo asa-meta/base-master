@@ -21,6 +21,7 @@
             app:justifyContent="flex_start">
 
             <Button
+                android:onClick="@{onClickEvent.check}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="版本识别》》1" />

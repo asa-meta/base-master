@@ -29,7 +29,7 @@ public class NotifySettingUtils {
     public static void openEMUINotifySetting(Context mContext) throws ActivityNotFoundException {
         mContext.enforceCallingOrSelfPermission("com.huawei.systemmanager.permission.ACCESS_INTERFACE", null);
 
-        String cls = OSRomUtils.isOSMore8() ? "com.huawei.notificationmanager.ui.NotificationAllChannelSettingsActivity" : "com.huawei.notificationmanager.ui.NotificationSettingsActivity";
+        String cls = OSRomUtils.isAndroid8() ? "com.huawei.notificationmanager.ui.NotificationAllChannelSettingsActivity" : "com.huawei.notificationmanager.ui.NotificationSettingsActivity";
         ComponentName componentName = new ComponentName("com.huawei.systemmanager", "com.huawei.notificationmanager.ui.NotificationSettingsActivity");
         Intent intent = new Intent();
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

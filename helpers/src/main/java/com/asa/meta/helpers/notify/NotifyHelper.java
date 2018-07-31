@@ -12,7 +12,6 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.NotificationCompat;
 
-import com.asa.meta.helpers.R;
 import com.asa.meta.helpers.androidOs.OSRomUtils;
 
 import java.util.HashMap;
@@ -52,7 +51,7 @@ public class NotifyHelper {
     }
 
     public static void initChannel(Context context,NotificationChannel... notificationChannel) {
-        if (OSRomUtils.isOSMore8() && notificationChannel != null) {
+        if (OSRomUtils.isAndroid8() && notificationChannel != null) {
 
             NotificationManager notificationManager = (NotificationManager) context.getSystemService(Activity.NOTIFICATION_SERVICE);
             for (NotificationChannel chanel : notificationChannel) {
