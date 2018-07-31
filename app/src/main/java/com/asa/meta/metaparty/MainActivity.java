@@ -1,13 +1,17 @@
 package com.asa.meta.metaparty;
 
-import android.Manifest;
-import android.os.Build;
+import android.content.Context;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.widget.TextView;
+import android.view.View;
 
+import com.asa.meta.helpers.androidOs.OSRomUtils;
+import com.asa.meta.helpers.notify.NotifyHelper;
+import com.asa.meta.helpers.notify.NotifySettingUtils;
+import com.asa.meta.helpers.toast.ToastUtils;
+import com.asa.meta.metaparty.databinding.ActivityMainBinding;
 import com.asa.meta.rxhttp.callback.DownloadProgressCallBack;
 import com.asa.meta.rxhttp.disposable.DisposableManager;
 import com.asa.meta.rxhttp.exception.ApiException;
@@ -22,29 +26,22 @@ import org.json.JSONObject;
 import io.reactivex.disposables.Disposable;
 
 public class MainActivity extends AppCompatActivity implements ProgressDialog {
-    private final static String TAG = "MainActivity";
-    TextView textView;
-    android.app.ProgressDialog progressDialog;
+
+    private android.app.ProgressDialog progressDialog;
+
+    private Context mContext;
+    private String TAG = getClass().getSimpleName();
+    private ActivityMainBinding mBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        mBinding.setOnClickEvent(new OnClickEvent(this));
         progressDialog = new android.app.ProgressDialog(this);
-        textView = findViewById(R.id.tv_show);
-//        test1();
-//
-//        test2();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},1110);
-        }
-        test3();
+        this.mContext = this;
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
 
     @Override
     protected void onDestroy() {
@@ -54,30 +51,30 @@ public class MainActivity extends AppCompatActivity implements ProgressDialog {
 
     //下载文件
     private Disposable test3() {
-         final NotifyHelper notifyHelper  = NotifyController.notifyProgress(MainActivity.this);
+        final NotifyHelper notifyHelper = NotifyController.notifyProgress(MainActivity.this);
         return RxHttp.downLoad("http://zhstatic.zhihu.com/pkg/store/daily/zhihu-daily-zhihu-2.6.0(744)-release.apk")
                 .saveName("zhihu.apk")
                 .execute(TAG, new DownloadProgressCallBack<String>() {
-
                     @Override
                     public void onStart() {
                         HttpLog.e("下载开始");
-
+                        NotifyController.notifyProgressStart(notifyHelper).notifyProgress(0);
                     }
 
                     @Override
                     public void onError(ApiException e) {
                         HttpLog.e("下载错误" + e.getMessage());
+                        NotifyController.notifyProgressFail(notifyHelper, e.getMessage()).notifyProgressEnd();
                     }
 
                     @Override
                     public void update(long bytesRead, long contentLength, boolean done) {
                         int progress = (int) (bytesRead * 100 / contentLength);
                         HttpLog.e(progress + "% ");
-                        notifyHelper.notifyProgress(progress);
+                        NotifyController.notifyProgressIng(notifyHelper).notifyProgress(progress);
                         if (done) {//下载完成
                             HttpLog.e("下载完成");
-                            notifyHelper.notifyProgressEnd();
+                            NotifyController.notifyProgressEnd(notifyHelper).notifyProgressEnd();
                         }
                     }
 
@@ -98,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements ProgressDialog {
                 .subscribe(new JSONObjectSubscriber(TAG) {
                     @Override
                     public void onSuccess(JSONObject jsonObject) {
-
+                        mBinding.showTextView.setText(jsonObject.toString());
                     }
 
                     @Override
@@ -129,7 +126,7 @@ public class MainActivity extends AppCompatActivity implements ProgressDialog {
                     @Override
                     public void onSuccess(JSONObject jsonObject) {
                         HttpLog.e(Thread.currentThread().getName());
-                        textView.setText(jsonObject.toString());
+                        mBinding.showTextView.setText(jsonObject.toString());
                     }
                 });
 
@@ -147,6 +144,74 @@ public class MainActivity extends AppCompatActivity implements ProgressDialog {
         HttpLog.d("----------hideProgressDialog---------------");
         if (progressDialog.isShowing()) {
             progressDialog.dismiss();
+        }
+
+    }
+
+
+    public class OnClickEvent {
+        private Context context;
+        private int i;
+
+        public OnClickEvent(Context context) {
+            this.context = context;
+        }
+
+        public void onClickXiaoMi(View view) {
+            if (!OSRomUtils.getSystem().equals(OSRomUtils.SYS_MIUI)) {
+                ToastUtils.showToast("不是小米手机，这个手机是：" + OSRomUtils.getSystemInfo().toString());
+                return;
+            }
+
+            try {
+                NotifySettingUtils.openMIUINotifySetting(mContext);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+
+        public void onClickNotify1(View view) {
+            i++;
+            NotifyController.notifyTest2(context, "测试1", "测试：" + i);
+        }
+
+
+        public void onClickNotify2(View view) {
+            NotifyController.notifyTest3(context, "测试2", "鸟儿啄完稻谷，轻轻梳理着光润的羽毛。\n" +
+                    "“现在你爱这稻谷吗？”精灵又取出一束黄澄澄的稻谷。\n" +
+                    "鸟儿抬头望着远处的一湾泉水回答：“现在我爱那一湾泉水，我有点渴了。”\n" +
+                    "精灵摘下一片树叶，里面盛了一汪泉水。\n" +
+                    "鸟儿喝完泉水，准备振翅飞去。");
+        }
+
+        public void onClickNotify3(View view) {
+            test3();
+        }
+
+        public void onClickNotify4(View view) {
+            test1();
+        }
+
+        public void onClickNotify5(View view) {
+            test2();
+        }
+
+        public void onClickHuaWei(View view) {
+            if (!OSRomUtils.getSystem().equals(OSRomUtils.SYS_EMUI)) {
+                ToastUtils.showToast("不是华为手机，这个手机是：" + OSRomUtils.getSystemInfo().toString());
+                return;
+            }
+
+            try {
+                NotifySettingUtils.openEMUINotifySetting(mContext);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        public void onClickOther(View view) {
+            NotifySettingUtils.openOtherNotifySetting(context);
         }
 
     }

@@ -16,10 +16,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
     implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.google.android:flexbox:1.0.0'
     api project(':rxhttp')
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+    api project(path: ':helpers')
 }

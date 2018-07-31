@@ -24,16 +24,26 @@ public class NotifyHelper {
     private Notification notification;
     private NotificationCompat.Builder mBuilder;
     private NotificationManager notificationManager;
-    private static final String LOG_TAG = "NotifyUtils";
+    private static final String LOG_TAG = "NotifyHelper";
     private static Map<String, String> mChannelMap = new HashMap<>();
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private static NotificationChannel buildDefaultChannel(String channelId, String channelName) {
+    public static NotificationChannel buildDefaultChannel(String channelId, String channelName) {
         NotificationChannel channel = new NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_HIGH);
         channel.enableLights(true);//是否在桌面icon右上角展示小红点
         channel.setLightColor(Color.RED);//小红点颜色
         channel.setShowBadge(true); //是否在久按桌面图标时显示此渠道的通知
-        channel.enableVibration(true);
+        return channel;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public static NotificationChannel buildProgressChannel(String channelId, String channelName) {
+        NotificationChannel channel = new NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_HIGH);
+        channel.enableLights(false);//是否在桌面icon右上角展示小红点
+        channel.setShowBadge(true); //是否在久按桌面图标时显示此渠道的通知
+        channel.enableVibration(false);
+        channel.enableLights(false);
+        channel.setSound(null,null);
         return channel;
     }
 
@@ -180,8 +190,6 @@ public class NotifyHelper {
             this.smallIcon = smallIcon;
             return this;
         }
-
-
 
         public String getTitle() {
             return title;
