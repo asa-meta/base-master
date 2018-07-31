@@ -74,7 +74,7 @@ public class NotifyHelper {
         }
         mBuilder.setDefaults(NotificationCompat.DEFAULT_LIGHTS);
         mBuilder.setSmallIcon(notifyInfo.getSmallIcon());
-        mBuilder.setLargeIcon(BitmapFactory.decodeResource(mContext.getResources(), notifyInfo.getSmallIcon()));
+        mBuilder.setLargeIcon(BitmapFactory.decodeResource(mContext.getResources(), notifyInfo.getLargeIcon()));
         mBuilder.setTicker(notifyInfo.getContent());
         mBuilder.setContentTitle(notifyInfo.getTitle());
         mBuilder.setContentText(notifyInfo.getContent());
@@ -93,7 +93,7 @@ public class NotifyHelper {
         }
 
         mBuilder.setSmallIcon(notifyInfo.getSmallIcon());
-        mBuilder.setLargeIcon(BitmapFactory.decodeResource(mContext.getResources(), notifyInfo.getSmallIcon()));
+        mBuilder.setLargeIcon(BitmapFactory.decodeResource(mContext.getResources(), notifyInfo.getLargeIcon()));
         mBuilder.setTicker(notifyInfo.getContent());
         mBuilder.setContentTitle(notifyInfo.getTitle());
         mBuilder.setContentText(notifyInfo.getContent());
@@ -172,6 +172,16 @@ public class NotifyHelper {
         private boolean isLights = true;
         private String content = "";
 
+        private int largeIcon;
+
+        public int getLargeIcon() {
+            return largeIcon;
+        }
+
+        public NotifyInfo setLargeIcon(int largeIcon) {
+            this.largeIcon = largeIcon;
+            return this;
+        }
         private int color;
 
         public int getColor() {

@@ -25,8 +25,8 @@ public class NotifyController {
     public static void initChannel(Context context) {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             NotificationChannel channel1 = NotifyHelper.buildProgressChannel(NotifyController.defultChannlId, NotifyController.defultChannlName);
-            NotificationChannel channel2 = NotifyHelper.buildProgressChannel(NotifyController.test2Id, NotifyController.test2Id);
-            NotificationChannel channel3 = NotifyHelper.buildProgressChannel(NotifyController.test3Id, NotifyController.test3Id);
+            NotificationChannel channel2 = NotifyHelper.buildDefaultChannel(NotifyController.test2Id, NotifyController.test2Id);
+            NotificationChannel channel3 = NotifyHelper.buildDefaultChannel(NotifyController.test3Id, NotifyController.test3Id);
 
             NotifyHelper.initChannel(context, channel1, channel2, channel3);
         }
@@ -36,7 +36,8 @@ public class NotifyController {
     public static NotifyHelper notifyDefault(Context context, String channlId, String title, String content) {
         return NotifyHelper.buildNotifyHelper(context).
                 setNotificationId(channlId.hashCode()).setCompatBuilder(channlId, NotifyHelper.NotifyInfo.build().
-                setTitle(title).setContent(content).setColor(Color.GREEN).
+                setTitle(title).setContent(content).
+                setLargeIcon(R.drawable.logo).
                 setSmallIcon(R.mipmap.ic_launcher_foreground));
     }
 
@@ -57,13 +58,14 @@ public class NotifyController {
 
     public static NotifyHelper notifyProgressStart(NotifyHelper notifyHelper) {
         return notifyHelper.setProgressBuilder(defultChannlId, NotifyHelper.NotifyInfo.build().
-                setTitle("下载知乎安装包").setContent("下载开始").setColor(Color.RED).
+                setTitle("下载知乎安装包").setContent("下载开始").setColor(Color.RED).setLargeIcon(R.drawable.logo).
                 setSmallIcon(R.mipmap.ic_launcher_foreground));
     }
 
     public static NotifyHelper notifyProgressIng(NotifyHelper notifyHelper) {
         return notifyHelper.setProgressBuilder(defultChannlId, NotifyHelper.NotifyInfo.build().
                 setTitle("下载知乎安装包").setContent("下载中").setColor(Color.YELLOW).
+                setLargeIcon(R.drawable.logo).
                 setSmallIcon(R.mipmap.ic_launcher_foreground));
     }
 
@@ -72,12 +74,14 @@ public class NotifyController {
         return notifyHelper.setProgressBuilder(defultChannlId, NotifyHelper.NotifyInfo.build().
                 setTitle("下载知乎安装包").setContent("下载完成").
                 setPendingIntent(InstallApkUtils.getInstallApkPendingIntent(context, apkFile)).
+                setLargeIcon(R.drawable.logo).
                 setSmallIcon(R.mipmap.ic_launcher_foreground));
     }
 
     public static NotifyHelper notifyProgressFail(NotifyHelper notifyHelper, String errorCode) {
         return notifyHelper.setProgressBuilder(defultChannlId, NotifyHelper.NotifyInfo.build().
                 setTitle("下载知乎安装包").setContent("下载失败:" + errorCode).
+                setLargeIcon(R.drawable.logo).
                 setSmallIcon(R.mipmap.ic_launcher_foreground));
     }
 }
