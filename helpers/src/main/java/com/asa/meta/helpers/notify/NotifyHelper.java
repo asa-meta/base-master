@@ -49,7 +49,6 @@ public class NotifyHelper {
 
     public static void initChannel(Context context,NotificationChannel... notificationChannel) {
         if (OSRomUtils.isAndroid8() && notificationChannel != null) {
-
             NotificationManager notificationManager = (NotificationManager) context.getSystemService(Activity.NOTIFICATION_SERVICE);
             for (NotificationChannel chanel : notificationChannel) {
                 notificationManager.createNotificationChannel(chanel);
