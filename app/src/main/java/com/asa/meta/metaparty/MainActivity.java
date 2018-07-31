@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.View;
 
 import com.asa.meta.helpers.androidOs.OSRomUtils;
+import com.asa.meta.helpers.filesUtils.FileUtils;
+import com.asa.meta.helpers.filesUtils.InstallApkUtils;
 import com.asa.meta.helpers.notify.NotifyHelper;
 import com.asa.meta.helpers.notify.NotifySettingUtils;
 import com.asa.meta.helpers.toast.ToastUtils;
@@ -22,6 +24,8 @@ import com.asa.meta.rxhttp.subsciber.ProgressDialogSubscriber;
 import com.asa.meta.rxhttp.utils.HttpLog;
 
 import org.json.JSONObject;
+
+import java.io.File;
 
 import io.reactivex.disposables.Disposable;
 
@@ -58,12 +62,14 @@ public class MainActivity extends AppCompatActivity implements ProgressDialog {
                     @Override
                     public void onStart() {
                         HttpLog.e("下载开始");
+                        mBinding.btnDownload.setText("下载开始");
                         NotifyController.notifyProgressStart(notifyHelper).notifyProgress(0);
                     }
 
                     @Override
                     public void onError(ApiException e) {
                         HttpLog.e("下载错误" + e.getMessage());
+                        mBinding.btnDownload.setText("下载错误");
                         NotifyController.notifyProgressFail(notifyHelper, e.getMessage()).notifyProgressEnd();
                     }
 
@@ -72,8 +78,10 @@ public class MainActivity extends AppCompatActivity implements ProgressDialog {
                         int progress = (int) (bytesRead * 100 / contentLength);
                         HttpLog.e(progress + "% ");
                         NotifyController.notifyProgressIng(notifyHelper).notifyProgress(progress);
+                        mBinding.btnDownload.setText(progress+"%");
                         if (done) {//下载完成
                             HttpLog.e("下载完成");
+                            mBinding.btnDownload.setText("下载完成:点击重新下载");
                             NotifyController.notifyProgressEnd(notifyHelper).notifyProgressEnd();
                         }
                     }
@@ -81,6 +89,11 @@ public class MainActivity extends AppCompatActivity implements ProgressDialog {
                     @Override
                     public void onComplete(String path) {
                         HttpLog.e("保存的路径" + path);
+                        File file = new File(path);
+                        if (FileUtils.checkFile(file) && InstallApkUtils.checkApkFile(mContext, file.getPath())) {
+                            InstallApkUtils.install(mContext, file);
+                        }
+
                     }
                 });
 
@@ -157,7 +170,7 @@ public class MainActivity extends AppCompatActivity implements ProgressDialog {
             this.context = context;
         }
 
-        public void check(View view){
+        public void check(View view) {
             ToastUtils.showToast("手机版本信息：" + OSRomUtils.getSystemInfo().toString());
         }
 
@@ -206,12 +219,8 @@ public class MainActivity extends AppCompatActivity implements ProgressDialog {
                 ToastUtils.showToast("不是华为手机，这个手机是：" + OSRomUtils.getSystemInfo().toString());
                 return;
             }
+            NotifySettingUtils.openOtherNotifySetting(context);
 
-            try {
-                NotifySettingUtils.openEMUINotifySetting(mContext);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
         }
 
         public void onClickOther(View view) {
