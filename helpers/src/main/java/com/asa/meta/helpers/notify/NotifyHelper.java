@@ -117,11 +117,6 @@ public class NotifyHelper {
         return this;
     }
 
-    //根据id清除通知
-    public static void clear(Context context, int notificationId) {
-        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Activity.NOTIFICATION_SERVICE);
-        notificationManager.cancel(notificationId);
-    }
 
     public void notifyProgress(int progress) {
         mBuilder.setProgress(100, progress, false);
@@ -131,6 +126,11 @@ public class NotifyHelper {
     public void notifyProgressEnd() {
         mBuilder.setProgress(0, 0, false);
         sent();
+    }
+
+    public static void clear(Context context, int notificationId) {
+        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Activity.NOTIFICATION_SERVICE);
+        notificationManager.cancel(notificationId);
     }
 
     public void notifyNormal() {
@@ -153,14 +153,24 @@ public class NotifyHelper {
         notificationManager.notify(notificationId, notification);
     }
 
-    public void clear() {
-        notificationManager.cancel(notificationId);
+    public static void clearAll(Context context) {
+        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Activity.NOTIFICATION_SERVICE);
+        notificationManager.cancelAll();
+    }
+
+    public void notifyProgress(boolean indeterminate) {
+        mBuilder.setProgress(100, 0, indeterminate);
+        sent();
     }
 
     public void clearAll() {
         notificationManager.cancelAll();
     }
 
+    //根据id清除通知
+    public void clear() {
+        notificationManager.cancel(notificationId);
+    }
 
     public final static class NotifyInfo {
         private int smallIcon;

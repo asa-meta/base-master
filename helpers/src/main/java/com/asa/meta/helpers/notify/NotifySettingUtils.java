@@ -13,8 +13,7 @@ import com.asa.meta.helpers.androidOs.OSRomUtils;
 
 public class NotifySettingUtils {
 
-
-    //  是否有通知的权限 （未完成适配）
+    //  是否有通知的权限
     public static boolean hasNotifyPermission(Context context) {
         if (Build.VERSION.SDK_INT >= 19) {
             return NotificationManagerCompat.from(context).areNotificationsEnabled();
@@ -24,8 +23,8 @@ public class NotifySettingUtils {
 
     }
 
-    //华为打开通知设置 com.huawei.systemmanager/com.huawei.notificationmanager.ui.NotificationSettingsActivity:
-    //Displayed com.huawei.systemmanager/com.huawei.notificationmanager.ui.NotificationAllChannelSettingsActivity
+ /*   //华为打开通知设置 com.huawei.systemmanager/com.huawei.notificationmanager.ui.NotificationSettingsActivity:
+     //  Displayed com.huawei.systemmanager/com.huawei.notificationmanager.ui.NotificationAllChannelSettingsActivity
     public static void openEMUINotifySetting(Context mContext) throws ActivityNotFoundException {
         mContext.enforceCallingOrSelfPermission("com.huawei.systemmanager.permission.ACCESS_INTERFACE", null);
 
@@ -40,7 +39,7 @@ public class NotifySettingUtils {
         intent.putExtra("from_package", mContext.getPackageName());
         mContext.sendBroadcast(intent, "com.huawei.systemmanager.permission.ACCESS_INTERFACE");
         mContext.startActivity(intent);
-    }
+    }*/
 
     //打开通知设置
     public static boolean openNotifySetting(Context mContext) {
@@ -50,7 +49,7 @@ public class NotifySettingUtils {
                 return true;
             } else {
                 openOtherNotifySetting(mContext);
-                return false;
+                return true;
             }
         } catch (ActivityNotFoundException e) {
             e.printStackTrace();
