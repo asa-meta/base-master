@@ -1,11 +1,14 @@
 package com.asa.meta.metaparty;
 
+import android.app.Notification;
 import android.app.NotificationChannel;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.graphics.Color;
 
 import com.asa.meta.helpers.filesUtils.InstallApkUtils;
 import com.asa.meta.helpers.notify.NotifyHelper;
+import com.asa.meta.helpers.notify.NotifySettingUtils;
 
 import java.io.File;
 
@@ -34,11 +37,13 @@ public class NotifyController {
     }
 
     public static NotifyHelper notifyDefault(Context context, String channlId, String title, String content) {
+
         return NotifyHelper.buildNotifyHelper(context).
-                setNotificationId(channlId.hashCode()).setCompatBuilder(channlId, NotifyHelper.NotifyInfo.build().
-                setTitle(title).setContent(content).
-                setLargeIcon(R.drawable.logo).
-                setSmallIcon(R.mipmap.ic_launcher_foreground));
+                setNotificationId(channlId.hashCode()).
+                setCompatBuilder(channlId, NotifyHelper.NotifyInfo.build().
+                        setTitle(title).setContent(content).
+                        setLargeIcon(R.drawable.logo).
+                        setSmallIcon(R.mipmap.ic_launcher_foreground));
     }
 
 
@@ -83,5 +88,18 @@ public class NotifyController {
                 setTitle("下载知乎安装包").setContent("下载失败:" + errorCode).
                 setLargeIcon(R.drawable.logo).
                 setSmallIcon(R.mipmap.ic_launcher_foreground));
+    }
+
+    public static Notification buildForegroundNotify(Context context) {
+        return NotifyHelper.buildNotifyHelper(context).setNotificationId(NotifyController.notifyDefaultId).setCompatBuilder(defultChannlId,
+                NotifyHelper.NotifyInfo.build().
+                        setLargeIcon(R.drawable.logo).
+                        setTitle("sigma正在为您收发邮件").setContent("部分手机可进入通知栏取消通知").
+                        setSmallIcon(R.mipmap.ic_launcher_foreground)
+        )
+                .setBigTextStyle("这是大大的字体\n哒哒哒")
+                .setAction(0, "通知页面", PendingIntent.getActivity(context, 111, NotifySettingUtils.getNotifySettingIntent(context), PendingIntent.FLAG_UPDATE_CURRENT))
+                .setAction(0, "停止", PendingIntent.getActivity(context, 112, NotifySettingUtils.getNotifySettingIntent(context), PendingIntent.FLAG_UPDATE_CURRENT))
+                .getNotification();
     }
 }

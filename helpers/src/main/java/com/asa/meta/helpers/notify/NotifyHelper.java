@@ -11,6 +11,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.NotificationCompat;
+import android.widget.RemoteViews;
 
 import com.asa.meta.helpers.androidOs.OSRomUtils;
 
@@ -39,7 +40,7 @@ public class NotifyHelper {
         channel.setShowBadge(true); //是否在久按桌面图标时显示此渠道的通知
         channel.enableVibration(false);
         channel.enableLights(false);
-        channel.setSound(null,null);
+        channel.setSound(null, null);
         return channel;
     }
 
@@ -47,7 +48,7 @@ public class NotifyHelper {
         return new NotifyHelper(context);
     }
 
-    public static void initChannel(Context context,NotificationChannel... notificationChannel) {
+    public static void initChannel(Context context, NotificationChannel... notificationChannel) {
         if (OSRomUtils.isAndroid8() && notificationChannel != null) {
             NotificationManager notificationManager = (NotificationManager) context.getSystemService(Activity.NOTIFICATION_SERVICE);
             for (NotificationChannel chanel : notificationChannel) {
@@ -82,6 +83,16 @@ public class NotifyHelper {
         if (notifyInfo.color > 0) {
             mBuilder.setColor(notifyInfo.color);
         }
+        return this;
+    }
+
+    public NotifyHelper setAction(int logo, String name, PendingIntent pendingIntent) {
+        mBuilder.addAction(logo, name, pendingIntent);
+        return this;
+    }
+
+    public NotifyHelper setBigTextStyle(String text) {
+        mBuilder.setStyle(new NotificationCompat.BigTextStyle().bigText(text));
         return this;
     }
 
@@ -139,6 +150,7 @@ public class NotifyHelper {
 
     public Notification getNotification() {
         notification = mBuilder.build();
+
         return notification;
     }
 
@@ -172,6 +184,11 @@ public class NotifyHelper {
         notificationManager.cancel(notificationId);
     }
 
+    public NotifyHelper setRemoteViews(RemoteViews remoteViews) {
+        mBuilder.setCustomBigContentView(remoteViews);
+        return this;
+    }
+
     public final static class NotifyInfo {
         private int smallIcon;
         PendingIntent pendingIntent;
@@ -191,6 +208,7 @@ public class NotifyHelper {
             this.largeIcon = largeIcon;
             return this;
         }
+
         private int color;
 
         public int getColor() {

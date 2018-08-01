@@ -69,6 +69,27 @@ public class NotifySettingUtils {
         mContext.startActivity(intent);
     }
 
+    public static Intent getNotifySettingIntent(Context mContext) {
+        Intent intent = new Intent();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            intent.setAction(Settings.ACTION_APP_NOTIFICATION_SETTINGS);
+            intent.putExtra(Settings.EXTRA_APP_PACKAGE, mContext.getPackageName());
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            intent.setAction(Settings.ACTION_APP_NOTIFICATION_SETTINGS);
+            intent.putExtra("app_package", mContext.getPackageName());
+            intent.putExtra("app_uid", mContext.getApplicationInfo().uid);
+        } else if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
+            intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+            intent.addCategory(Intent.CATEGORY_DEFAULT);
+            intent.setData(Uri.parse("package:" + mContext.getPackageName()));
+        } else {
+            intent.setAction("android.settings.APPLICATION_DETAILS_SETTINGS");
+            intent.setData(Uri.fromParts("package", mContext.getPackageName(), null));
+        }
+        return intent;
+    }
+
 
     //打开其他通知设置
     public static void openOtherNotifySetting(Context mContext) {
