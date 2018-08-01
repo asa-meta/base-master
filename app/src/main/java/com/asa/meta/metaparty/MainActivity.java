@@ -1,6 +1,7 @@
 package com.asa.meta.metaparty;
 
 import android.content.Context;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,7 @@ import com.asa.meta.helpers.filesUtils.FileUtils;
 import com.asa.meta.helpers.filesUtils.InstallApkUtils;
 import com.asa.meta.helpers.notify.NotifyHelper;
 import com.asa.meta.helpers.notify.NotifySettingUtils;
+import com.asa.meta.helpers.service.ServiceUtils;
 import com.asa.meta.helpers.toast.ToastUtils;
 import com.asa.meta.metaparty.databinding.ActivityMainBinding;
 import com.asa.meta.rxhttp.callback.DownloadProgressCallBack;
@@ -44,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements ProgressDialog {
         mBinding.setOnClickEvent(new OnClickEvent(this));
         progressDialog = new android.app.ProgressDialog(this);
         this.mContext = this;
+
     }
 
 
@@ -197,7 +200,9 @@ public class MainActivity extends AppCompatActivity implements ProgressDialog {
 
         public void onClickNotify1(View view) {
             i++;
-            NotifyController.notifyTest2(context, "测试1", "测试：" + i);
+//            NotifyController.notifyTest2(context, "测试1", "测试：" + i);
+
+            ServiceUtils.startService(context, new Intent(context, MyService.class));
         }
 
         public void checkNotify(View view) {
