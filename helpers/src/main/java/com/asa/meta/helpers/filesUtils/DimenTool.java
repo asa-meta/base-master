@@ -29,6 +29,7 @@ public class DimenTool {
     public static void main(String[] args) {
         generate();
 //        start();
+//        startText();
     }
 
     public static void initFileInfoControllers() {
@@ -52,6 +53,15 @@ public class DimenTool {
         return new StringBuilder().append("./helpers/src/main/res/values-sw").append(smallWidthDp).append("dp/dimens.xml").toString();
     }
 
+    private static void startText() {
+        for (int i = 0; i < 50; i++) {
+            //  <dimen name="dp_0">0dp</dimen>
+
+            System.out.println("<dimen name=\"sp_" + i + "\">" + i + "sp</dimen>");
+
+        }
+    }
+
     private static void start() {
         for (int i = -300; i < 301; i++) {
             //  <dimen name="dp_0">0dp</dimen>
@@ -60,7 +70,6 @@ public class DimenTool {
             } else {
                 System.out.println("<dimen name=\"dp_" + i + "\">" + i + "dp</dimen>");
             }
-
         }
     }
 
