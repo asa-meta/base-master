@@ -24,6 +24,7 @@ import com.asa.meta.rxhttp.main.RxHttp;
 import com.asa.meta.rxhttp.subsciber.JSONObjectSubscriber;
 import com.asa.meta.rxhttp.subsciber.ProgressDialogSubscriber;
 import com.asa.meta.rxhttp.utils.HttpLog;
+import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
@@ -46,6 +47,8 @@ public class MainActivity extends AppCompatActivity implements ProgressDialog {
         mBinding.setOnClickEvent(new OnClickEvent(this));
         progressDialog = new android.app.ProgressDialog(this);
         this.mContext = this;
+
+
 
     }
 
