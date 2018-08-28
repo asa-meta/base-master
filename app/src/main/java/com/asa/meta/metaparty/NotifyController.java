@@ -30,7 +30,6 @@ public class NotifyController {
             NotificationChannel channel1 = NotifyHelper.buildProgressChannel(NotifyController.defultChannlId, NotifyController.defultChannlName);
             NotificationChannel channel2 = NotifyHelper.buildDefaultChannel(NotifyController.test2Id, NotifyController.test2Id);
             NotificationChannel channel3 = NotifyHelper.buildDefaultChannel(NotifyController.test3Id, NotifyController.test3Id);
-
             NotifyHelper.initChannel(context, channel1, channel2, channel3);
         }
 

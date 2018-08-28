@@ -41,8 +41,10 @@ public class DownloadRequest extends BaseRequest<DownloadRequest> {
 
     public <T> Disposable execute(String tag, CallBack<T> callBack) {
         return (Disposable) build().generateRequest()
-                        .compose(RxUtil.<ResponseBody>io_new()).compose(new HandleErrTransformer()).retryWhen(new RetryExceptionFunc(retryCount, retryDelay, retryIncreaseDelay))
-                         .subscribeWith(new DownloadSubscriber(context, tag, savePath, saveName, callBack));
+                .compose(RxUtil.<ResponseBody>io_new())
+                .compose(new HandleErrTransformer())
+                .retryWhen(new RetryExceptionFunc(retryCount, retryDelay, retryIncreaseDelay))
+                .subscribeWith(new DownloadSubscriber(context, tag, savePath, saveName, callBack));
     }
 
     @Override

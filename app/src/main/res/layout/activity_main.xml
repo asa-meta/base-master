@@ -127,6 +127,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="@{onClickEvent.onClickOther}"
+                android:background="@drawable/navigtor_trip_drawable"
                 android:text="其他" />
 
             <TextView
