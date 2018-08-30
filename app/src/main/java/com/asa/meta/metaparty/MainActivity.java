@@ -16,6 +16,11 @@ import com.asa.meta.helpers.service.ServiceUtils;
 import com.asa.meta.helpers.test.TestActivity;
 import com.asa.meta.helpers.toast.ToastUtils;
 import com.asa.meta.metaparty.databinding.ActivityMainBinding;
+import com.asa.meta.metaparty.socket.DeviceFeedbackImp;
+import com.asa.meta.metaparty.socket.DeviceFeedbackService;
+import com.asa.meta.metaparty.socket.DeviceSearchImp;
+import com.asa.meta.metaparty.socket.DeviceSearchService;
+import com.asa.meta.rxhttp.cache.model.CacheMode;
 import com.asa.meta.rxhttp.callback.DownloadProgressCallBack;
 import com.asa.meta.rxhttp.disposable.DisposableManager;
 import com.asa.meta.rxhttp.exception.ApiException;
@@ -28,8 +33,16 @@ import com.asa.meta.rxhttp.utils.HttpLog;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.SocketException;
+import java.net.UnknownHostException;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
+import io.reactivex.Observable;
+import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Function;
 
 public class MainActivity extends TestActivity implements ProgressDialog {
 
@@ -44,6 +57,37 @@ public class MainActivity extends TestActivity implements ProgressDialog {
         mBinding.setOnClickEvent(new OnClickEvent(this));
         progressDialog = new android.app.ProgressDialog(this);
 
+//        test4();
+
+    }
+
+    private void test4() {
+        Observable.interval(0, 10 * 1000L, TimeUnit.MILLISECONDS).map(new Function<Long, String>() {
+            @Override
+            public String apply(Long aLong) throws Exception {
+                return String.valueOf(aLong);
+            }
+        }).subscribe(new Observer<String>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(String s) {
+                Log.i(TAG, "onNext: " + s);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+                Log.i(TAG, "onComplete: ");
+            }
+        });
     }
 
 
@@ -106,6 +150,7 @@ public class MainActivity extends TestActivity implements ProgressDialog {
 
     }
 
+
     //post
     private void test2() {
         RxHttp.post(API.URL_MEMBER_LOGIN)
@@ -128,14 +173,18 @@ public class MainActivity extends TestActivity implements ProgressDialog {
 
                     }
                 });
+
+
     }
 
     //get
     private void test1() {
+
+
         RxHttp.getInstance()
                 .get("version/android/2.3.0")
-//                .cacheMode(CacheMode.FIRSTCACHE)
-//                .cacheKey("test1")
+                .cacheMode(CacheMode.FIRSTCACHE)
+                .cacheKey("test1")
                 .execute()
                 .subscribe(new ProgressDialogSubscriber(TAG, this) {
                     @Override
@@ -172,6 +221,51 @@ public class MainActivity extends TestActivity implements ProgressDialog {
     public class OnClickEvent {
         private Context context;
         private int i;
+
+        public void buildSerivce(View view) {
+            DeviceSearchService searchService = null;
+            try {
+                searchService = new DeviceSearchImp(new DeviceSearchImp.SearchCallback() {
+                    @Override
+                    public void onComplete() {
+
+                    }
+
+                    @Override
+                    public void onGetList(List<String> list) {
+                        StringBuffer stringBuffer = new StringBuffer();
+                        for (String host : list) {
+                            stringBuffer.append(host).append("\n");
+                        }
+                        mBinding.showTextView.setText(stringBuffer.toString());
+                    }
+
+                    @Override
+                    public void onError(String error) {
+
+                    }
+                });
+
+                searchService.startSearch();
+                searchService.startFeedback();
+            } catch (SocketException e) {
+                e.printStackTrace();
+            } catch (UnknownHostException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        public void buildClient(View view) {
+            DeviceFeedbackService service = new DeviceFeedbackImp();
+            try {
+                service.startFeedback();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
 
         public OnClickEvent(Context context) {
             this.context = context;

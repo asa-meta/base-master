@@ -127,8 +127,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="@{onClickEvent.onClickOther}"
-                android:background="@drawable/navigtor_trip_drawable"
                 android:text="其他" />
+
+            <Button
+                android:id="@+id/service"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{onClickEvent.buildSerivce}"
+                android:text="服务端" />
+
+            <Button
+                android:id="@+id/client"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{onClickEvent.buildClient}"
+                android:text="客户端" />
 
             <TextView
                 android:id="@+id/showTextView"
