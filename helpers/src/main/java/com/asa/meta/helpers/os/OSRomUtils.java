@@ -1,4 +1,4 @@
-package com.asa.meta.helpers.androidOs;
+package com.asa.meta.helpers.os;
 
 import android.os.Build;
 import android.os.Environment;

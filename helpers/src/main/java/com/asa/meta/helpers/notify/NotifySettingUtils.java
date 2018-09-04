@@ -10,7 +10,7 @@ import android.os.Build;
 import android.provider.Settings;
 import android.support.v4.app.NotificationManagerCompat;
 
-import com.asa.meta.helpers.androidOs.OSRomUtils;
+import com.asa.meta.helpers.os.OSRomUtils;
 
 import java.lang.reflect.Method;
 

@@ -6,7 +6,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.graphics.Color;
 
-import com.asa.meta.helpers.filesUtils.InstallApkUtils;
+import com.asa.meta.helpers.files.InstallApkUtils;
 import com.asa.meta.helpers.notify.NotifyHelper;
 import com.asa.meta.helpers.notify.NotifySettingUtils;
 

@@ -1,4 +1,4 @@
-package com.asa.meta.helpers.filesUtils;
+package com.asa.meta.helpers.files;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,8 +6,6 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Build;
-import android.util.Log;
-
 
 import java.io.File;
 import java.util.List;

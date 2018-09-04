@@ -143,6 +143,13 @@
                 android:onClick="@{onClickEvent.buildClient}"
                 android:text="客户端" />
 
+            <Button
+                android:id="@+id/stopService"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{onClickEvent.stopReceiveClient}"
+                android:text="服务端停止接受客户端的上线确认反馈" />
+
             <TextView
                 android:id="@+id/showTextView"
                 android:layout_width="wrap_content"

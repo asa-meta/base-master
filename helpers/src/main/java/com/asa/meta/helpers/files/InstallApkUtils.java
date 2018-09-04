@@ -1,4 +1,4 @@
-package com.asa.meta.helpers.filesUtils;
+package com.asa.meta.helpers.files;
 
 import android.app.PendingIntent;
 import android.content.Context;

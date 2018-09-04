@@ -13,7 +13,7 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.app.NotificationCompat;
 import android.widget.RemoteViews;
 
-import com.asa.meta.helpers.androidOs.OSRomUtils;
+import com.asa.meta.helpers.os.OSRomUtils;
 
 public class NotifyHelper {
     private Context mContext;

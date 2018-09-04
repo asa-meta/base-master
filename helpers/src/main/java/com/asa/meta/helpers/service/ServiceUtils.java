@@ -4,7 +4,7 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 
-import com.asa.meta.helpers.androidOs.OSRomUtils;
+import com.asa.meta.helpers.os.OSRomUtils;
 
 import java.util.List;
 

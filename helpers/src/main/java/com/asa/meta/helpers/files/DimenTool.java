@@ -1,4 +1,4 @@
-package com.asa.meta.helpers.filesUtils;
+package com.asa.meta.helpers.files;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
