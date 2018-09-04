@@ -16,9 +16,9 @@ import com.asa.meta.helpers.service.ServiceUtils;
 import com.asa.meta.helpers.test.TestActivity;
 import com.asa.meta.helpers.toast.ToastUtils;
 import com.asa.meta.metaparty.databinding.ActivityMainBinding;
-import com.asa.meta.metaparty.socket.DeviceFeedbackImp;
+import com.asa.meta.metaparty.socket.DeviceFeedback;
 import com.asa.meta.metaparty.socket.DeviceFeedbackService;
-import com.asa.meta.metaparty.socket.DeviceSearchImp;
+import com.asa.meta.metaparty.socket.DeviceSearch;
 import com.asa.meta.metaparty.socket.DeviceSearchService;
 import com.asa.meta.rxhttp.cache.model.CacheMode;
 import com.asa.meta.rxhttp.callback.DownloadProgressCallBack;
@@ -223,9 +223,9 @@ public class MainActivity extends TestActivity implements ProgressDialog {
         private int i;
 
         public void buildSerivce(View view) {
-            DeviceSearchService searchService = null;
+            DeviceSearch searchService = null;
             try {
-                searchService = new DeviceSearchImp(new DeviceSearchImp.SearchCallback() {
+                searchService = new DeviceSearchService(new DeviceSearchService.SearchCallback() {
                     @Override
                     public void onComplete() {
 
@@ -258,7 +258,7 @@ public class MainActivity extends TestActivity implements ProgressDialog {
         }
 
         public void buildClient(View view) {
-            DeviceFeedbackService service = new DeviceFeedbackImp();
+            DeviceFeedback service = new DeviceFeedbackService();
             try {
                 service.startFeedback();
             } catch (IOException e) {
