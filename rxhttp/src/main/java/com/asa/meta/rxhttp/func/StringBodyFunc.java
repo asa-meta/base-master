@@ -1,8 +1,6 @@
 package com.asa.meta.rxhttp.func;
 
 
-import org.json.JSONObject;
-
 import io.reactivex.functions.Function;
 import okhttp3.ResponseBody;
 

@@ -5,8 +5,6 @@ package com.asa.meta.rxhttp.func;
 import com.asa.meta.rxhttp.cache.model.CacheResult;
 import com.asa.meta.rxhttp.utils.HttpLog;
 
-import org.json.JSONObject;
-
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
 

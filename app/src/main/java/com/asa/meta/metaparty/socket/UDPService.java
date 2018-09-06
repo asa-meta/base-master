@@ -102,8 +102,7 @@ public class UDPService {
         startUDPReceive();
     }
 
-    public void
-    startUDPReceive() {
+    public void startUDPReceive() {
         Observable.interval(1000, 10, TimeUnit.MILLISECONDS)
                 .subscribeOn(Schedulers.newThread())
                 .map(new Function<Long, DatagramPacket>() {

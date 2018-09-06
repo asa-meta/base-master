@@ -23,7 +23,6 @@ public class NotifySettingUtils {
         } else {
             return true;
         }
-
     }
 
 

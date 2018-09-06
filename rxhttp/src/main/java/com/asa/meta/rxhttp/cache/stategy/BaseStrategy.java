@@ -4,8 +4,6 @@ import com.asa.meta.rxhttp.cache.RxCache;
 import com.asa.meta.rxhttp.cache.model.CacheResult;
 import com.asa.meta.rxhttp.utils.HttpLog;
 
-import org.json.JSONObject;
-
 import java.util.ConcurrentModificationException;
 
 import io.reactivex.Observable;

@@ -1,10 +1,6 @@
 package com.asa.meta.rxhttp.func;
 
 
-import android.text.TextUtils;
-
-import com.asa.meta.rxhttp.exception.ServerException;
-
 import org.json.JSONObject;
 
 import io.reactivex.functions.Function;

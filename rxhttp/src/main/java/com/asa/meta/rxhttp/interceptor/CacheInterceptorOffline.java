@@ -5,8 +5,8 @@ package com.asa.meta.rxhttp.interceptor;
 import android.content.Context;
 
 import com.asa.meta.rxhttp.utils.HttpLog;
-import com.asa.meta.rxhttp.utils.HttpUtil;
 import com.asa.meta.rxhttp.utils.Utils;
+
 import java.io.IOException;
 
 import okhttp3.CacheControl;

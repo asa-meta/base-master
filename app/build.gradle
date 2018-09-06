@@ -1,14 +1,15 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+
     defaultConfig {
         applicationId "com.asa.meta.metaparty"
-        minSdkVersion 16
-        targetSdkVersion 27
-        versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+
     }
     buildTypes {
         release {
@@ -23,10 +24,11 @@ android {
 }
 
 dependencies {
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'com.android.support:design:27.1.1'
-    implementation 'com.google.android:flexbox:1.0.0'
+    implementation rootProject.ext.support["support-v4"]
+    implementation rootProject.ext.support["appcompat-v7"]
+    implementation rootProject.ext.support["recyclerview-v7"]
+    implementation rootProject.ext.support["design"]
+
     implementation project(':rxhttp')
-    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
-    api project(path: ':helpers')
+    api project(path: ':basehabit')
 }

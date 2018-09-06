@@ -26,6 +26,9 @@ public class MyService extends Service {
         Log.i(TAG, "onCreate: ");
         Notification notification = NotifyController.buildForegroundNotify(this);
         startForeground(NotifyController.notifyDefaultId, notification);
+
+        Log.i(TAG, "onCreate: stop");
+
     }
 
     @Override
