@@ -4,8 +4,6 @@ package com.asa.meta.rxhttp.cache.core;
 import com.asa.meta.rxhttp.utils.HttpLog;
 import com.asa.meta.rxhttp.utils.Utils;
 
-import org.json.JSONObject;
-
 import okio.ByteString;
 
 /**

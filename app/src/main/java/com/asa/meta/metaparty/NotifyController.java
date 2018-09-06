@@ -15,7 +15,7 @@ import java.io.File;
 public class NotifyController {
     public static final String defultChannlId = "123123";
     public static final String defultChannlName = "456789";
-    public static final int notifyDefaultId = defultChannlId.hashCode();
+    public static final int notifyDefaultId = 4444;
 
 
     public static final String test2Id = "31411";

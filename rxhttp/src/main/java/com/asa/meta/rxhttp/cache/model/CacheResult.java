@@ -2,8 +2,6 @@
 
 package com.asa.meta.rxhttp.cache.model;
 
-import org.json.JSONObject;
-
 import java.io.Serializable;
 
 /**

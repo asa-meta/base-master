@@ -13,6 +13,7 @@ public class ServiceUtils {
 
     public static void startService(Context context, Intent intent) {
         if (OSRomUtils.isAndroid8()) {
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startForegroundService(intent);
         } else {
             context.startService(intent);

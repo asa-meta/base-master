@@ -1,7 +1,7 @@
 package com.asa.meta.rxhttp.cache.core;
 
 import com.asa.meta.rxhttp.utils.Utils;
-import org.json.JSONObject;
+
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 

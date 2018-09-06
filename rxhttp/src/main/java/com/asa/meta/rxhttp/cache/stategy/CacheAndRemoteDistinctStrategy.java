@@ -4,8 +4,6 @@ package com.asa.meta.rxhttp.cache.stategy;
 import com.asa.meta.rxhttp.cache.RxCache;
 import com.asa.meta.rxhttp.cache.model.CacheResult;
 
-import org.json.JSONObject;
-
 import io.reactivex.Observable;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
