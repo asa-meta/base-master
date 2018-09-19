@@ -11,10 +11,12 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
     protected V binding;
     protected VM viewModel;
 
+    public String TAG = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        TAG = getClass().getSimpleName();
         initParam();
 
         initViewDataBinding(savedInstanceState);
