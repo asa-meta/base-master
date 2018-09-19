@@ -1,0 +1,57 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+        vectorDrawables.useSupportLibrary = true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    lintOptions {
+        abortOnError false
+        checkReleaseBuilds false
+    }
+
+}
+
+
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+
+    implementation rootProject.ext.support["support-v4"]
+    implementation rootProject.ext.support["appcompat-v7"]
+    implementation rootProject.ext.support["recyclerview-v7"]
+    implementation rootProject.ext.support["design"]
+    implementation rootProject.ext.support["exifinterface"]
+
+    //rxjava
+    implementation rootProject.ext.dependencies.rxjava
+    implementation rootProject.ext.dependencies.rxandroid
+    //network
+    implementation rootProject.ext.dependencies.okhttp
+    implementation rootProject.ext.dependencies.retrofit
+    implementation rootProject.ext.dependencies["converter-gson"]
+    implementation rootProject.ext.dependencies["adapter-rxjava"]
+    implementation rootProject.ext.dependencies["logging-interceptor"]
+    implementation rootProject.ext.dependencies["disklrucache"]
+    api rootProject.ext.dependencies["ucrop"]
+    api rootProject.ext.dependencies["glide"]
+    annotationProcessor rootProject.ext.dependencies["glide-compiler"]
+
+
+    compileOnly 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
+}
+
+
+
+
+

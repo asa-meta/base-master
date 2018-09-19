@@ -18,6 +18,11 @@ android {
         }
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
     dataBinding {
         enabled = true
     }
@@ -31,5 +36,5 @@ dependencies {
 
     implementation project(':rxhttp')
     api project(path: ':basehabit')
-    api project(path: ':RxGalleryFinal')
+    api project(path: ':gallery')
 }

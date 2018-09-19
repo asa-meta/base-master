@@ -8,9 +8,9 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/RxGalleryFinal" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/basehabit" />
+            <option value="$PROJECT_DIR$/gallery" />
             <option value="$PROJECT_DIR$/helpers" />
             <option value="$PROJECT_DIR$/rxhttp" />
           </set>

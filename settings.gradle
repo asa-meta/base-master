@@ -1,1 +1,1 @@
-include ':app', ':rxhttp', ':helpers', ':basehabit','RxGalleryFinal';
+include ':app', ':rxhttp', ':helpers', ':basehabit','gallery';

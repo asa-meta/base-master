@@ -42,6 +42,15 @@
         <activity android:name=".Main2Activity" />
 
         <service android:name=".MyService"></service>
+
+        <activity
+            android:name="cn.finalteam.rxgalleryfinal.ui.activity.MediaActivity"
+            android:exported="true" />
+
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>

@@ -1,11 +1,15 @@
 package com.asa.meta.metaparty;
 
-import android.content.Context;
+import android.app.Activity;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.asa.meta.helpers.files.FileUtils;
 import com.asa.meta.helpers.files.InstallApkUtils;
@@ -16,7 +20,6 @@ import com.asa.meta.helpers.service.ServiceUtils;
 import com.asa.meta.helpers.test.TestActivity;
 import com.asa.meta.helpers.toast.ToastUtils;
 import com.asa.meta.metaparty.databinding.ActivityMainBinding;
-import com.asa.meta.metaparty.socket.TcpService;
 import com.asa.meta.metaparty.socket.UDPService;
 import com.asa.meta.rxhttp.cache.model.CacheMode;
 import com.asa.meta.rxhttp.callback.DownloadProgressCallBack;
@@ -26,18 +29,21 @@ import com.asa.meta.rxhttp.main.RxHttp;
 import com.asa.meta.rxhttp.subsciber.JSONObjectSubscriber;
 import com.asa.meta.rxhttp.subsciber.ProgressDialogSubscriber;
 import com.asa.meta.rxhttp.utils.HttpLog;
+import com.bumptech.glide.Glide;
 
 import org.json.JSONObject;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 
-import cn.finalteam.rxgalleryfinal.RxGalleryFinal;
-import cn.finalteam.rxgalleryfinal.imageloader.ImageLoaderType;
+import cn.finalteam.rxgalleryfinal.RxGalleryFinalApi;
+import cn.finalteam.rxgalleryfinal.SimpleRxGalleryFinal;
 import cn.finalteam.rxgalleryfinal.rxbus.RxBusResultDisposable;
 import cn.finalteam.rxgalleryfinal.rxbus.event.ImageRadioResultEvent;
+import cn.finalteam.rxgalleryfinal.ui.RxGalleryListener;
+import cn.finalteam.rxgalleryfinal.ui.base.IMultiImageCheckedListener;
+import cn.finalteam.rxgalleryfinal.ui.base.IRadioImageCheckedListener;
 
 public class MainActivity extends TestActivity implements ProgressDialog {
     private android.app.ProgressDialog progressDialog;
@@ -49,22 +55,40 @@ public class MainActivity extends TestActivity implements ProgressDialog {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         mBinding.setOnClickEvent(new OnClickEvent(this));
         progressDialog = new android.app.ProgressDialog(this);
+        RxGalleryListener.getInstance().setRadioImageCheckedListener(new IRadioImageCheckedListener() {
+            @Override
+            public void cropAfter(Object t) {
+                Log.i(TAG, "cropAfter: " + t.toString());
+            }
 
-        RxGalleryFinal
-                .with(this)
-                .image()
-                .radio()
-                .crop()
-                .imageLoader(ImageLoaderType.GLIDE)
-                .subscribe(new RxBusResultDisposable<ImageRadioResultEvent>() {
-                    @Override
-                    protected void onEvent(ImageRadioResultEvent imageRadioResultEvent) throws Exception {
-                        //图片选择结果
-                        Log.i(TAG, "onEvent: "+imageRadioResultEvent.getResult().getCropPath());
+            @Override
+            public boolean isActivityFinish() {
+                return false;
+            }
+        });
 
-                    }
-                })
-                .openGallery();
+        RxGalleryListener
+                .getInstance()
+                .setMultiImageCheckedListener(
+                        new IMultiImageCheckedListener() {
+                            @Override
+                            public void selectedImg(Object t, boolean isChecked) {
+                                Toast.makeText(getBaseContext(), isChecked ? "选中" : "取消选中", Toast.LENGTH_SHORT).show();
+                            }
+
+                            @Override
+                            public void selectedImgMax(Object t, boolean isChecked, int maxSize) {
+                                Toast.makeText(getBaseContext(), "你最多只能选择" + maxSize + "张图片", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        SimpleRxGalleryFinal.get().onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
@@ -83,10 +107,10 @@ public class MainActivity extends TestActivity implements ProgressDialog {
 
 
     public class OnClickEvent {
-        private Context context;
+        private Activity context;
         private int i;
 
-        public OnClickEvent(Context context) {
+        public OnClickEvent(Activity context) {
             this.context = context;
         }
 
@@ -270,6 +294,41 @@ public class MainActivity extends TestActivity implements ProgressDialog {
 
         public void onClickOther(View view) {
             NotifySettingUtils.openOtherNotifySetting(context);
+        }
+
+        public void onClickOpenGallery(View view) {
+            RxGalleryFinalApi.getInstance(context).openGalleryRadioImgDefault(new RxBusResultDisposable<ImageRadioResultEvent>() {
+                @Override
+                protected void onEvent(ImageRadioResultEvent imageRadioResultEvent) throws Exception {
+                    Log.i(TAG, "onEvent: " + imageRadioResultEvent.getResult().getOriginalPath());
+                }
+            });
+        }
+
+        public void openCamera(View view) {
+            SimpleRxGalleryFinal.get().init(new SimpleRxGalleryFinal.RxGalleryFinalCropListener() {
+                @NonNull
+                @Override
+                public Activity getSimpleActivity() {
+                    return context;
+                }
+
+                @Override
+                public void onCropCancel() {
+                    Log.i(TAG, "onCropCancel: ");
+                }
+
+                @Override
+                public void onCropSuccess(@Nullable Uri uri) {
+                    Log.i(TAG, "onCropSuccess: " + uri.getPath());
+                    Glide.with(context).load(uri).into(mBinding.ivTest);
+                }
+
+                @Override
+                public void onCropError(@NonNull String errorMessage) {
+                    Log.i(TAG, "onCropError: " + errorMessage);
+                }
+            }).openCamera();
         }
 
     }
