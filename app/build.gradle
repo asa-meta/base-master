@@ -31,4 +31,5 @@ dependencies {
 
     implementation project(':rxhttp')
     api project(path: ':basehabit')
+    api project(path: ':RxGalleryFinal')
 }

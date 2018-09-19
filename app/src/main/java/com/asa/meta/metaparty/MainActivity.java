@@ -34,6 +34,11 @@ import java.io.IOException;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 
+import cn.finalteam.rxgalleryfinal.RxGalleryFinal;
+import cn.finalteam.rxgalleryfinal.imageloader.ImageLoaderType;
+import cn.finalteam.rxgalleryfinal.rxbus.RxBusResultDisposable;
+import cn.finalteam.rxgalleryfinal.rxbus.event.ImageRadioResultEvent;
+
 public class MainActivity extends TestActivity implements ProgressDialog {
     private android.app.ProgressDialog progressDialog;
     private ActivityMainBinding mBinding;
@@ -45,11 +50,21 @@ public class MainActivity extends TestActivity implements ProgressDialog {
         mBinding.setOnClickEvent(new OnClickEvent(this));
         progressDialog = new android.app.ProgressDialog(this);
 
-        try {
-            TcpService.getInstance().buildService();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        RxGalleryFinal
+                .with(this)
+                .image()
+                .radio()
+                .crop()
+                .imageLoader(ImageLoaderType.GLIDE)
+                .subscribe(new RxBusResultDisposable<ImageRadioResultEvent>() {
+                    @Override
+                    protected void onEvent(ImageRadioResultEvent imageRadioResultEvent) throws Exception {
+                        //图片选择结果
+                        Log.i(TAG, "onEvent: "+imageRadioResultEvent.getResult().getCropPath());
+
+                    }
+                })
+                .openGallery();
     }
 
     @Override
