@@ -35,6 +35,8 @@ public class SimpleRxGalleryFinal {
     }
 
     public void openCamera() {
+
+
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         imagePath = Uri.fromFile(getDiskCacheDir());
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {

@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import com.asa.meta.rxhttp.api.ApiService;
 import com.asa.meta.rxhttp.cache.RxCache;
 import com.asa.meta.rxhttp.cache.model.CacheMode;
+import com.asa.meta.rxhttp.func.ByteBodyFunc;
 import com.asa.meta.rxhttp.func.Sting2JSONObjectFunc;
 import com.asa.meta.rxhttp.func.StringBodyFunc;
 import com.asa.meta.rxhttp.https.HttpsUtils;
@@ -527,7 +528,14 @@ public abstract class BaseRequest<R extends BaseRequest> {
                 .compose(rxCache.transformer(cacheMode))
                 .compose(new CacheResultTramsformer())
                 .map(new Sting2JSONObjectFunc())
+                ;
+    }
 
+    public Observable executeByte() {
+        return build()
+                .generateRequest()
+                .compose(RxUtil.io_main())
+                .map(new ByteBodyFunc())
                 ;
     }
 
