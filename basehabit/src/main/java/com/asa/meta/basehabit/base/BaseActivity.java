@@ -1,5 +1,6 @@
 package com.asa.meta.basehabit.base;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
@@ -96,5 +97,13 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
     @Override
     public void initViewObservable() {
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (viewModel != null) {
+            viewModel.onActivityResult(requestCode, resultCode, data);
+        }
     }
 }

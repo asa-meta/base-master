@@ -4,8 +4,8 @@
 
     <data>
         <variable
-            name="onClickEvent"
-            type="com.asa.meta.metaparty.MainActivity.OnClickEvent" />
+            name="viewModel"
+            type="com.asa.meta.metaparty.MainAtyModel" />
     </data>
 
     <FrameLayout
@@ -22,88 +22,88 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="@{onClickEvent.check}"
+                android:onClick="@{viewModel.check}"
                 android:text="版本识别》》1" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="@{onClickEvent.onClickOpenGallery}"
+                android:onClick="@{viewModel.onClickOpenGallery}"
                 android:text="打开图册" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="@{onClickEvent.openCamera}"
+                android:onClick="@{viewModel.openCamera}"
                 android:text="打开相机" />
 
             <Button
                 android:id="@+id/btn_check_notify"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="@{onClickEvent.checkNotify}"
-                android:text="是否有通知权限:" />
+                android:onClick="@{viewModel.checkNotify}"
+                android:text="@{viewModel.notifyPermissionText}" />
 
             <Button
                 android:id="@+id/btn_expend_notify"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="@{onClickEvent.expNotify}"
+                android:onClick="@{viewModel.expNotify}"
                 android:text="展开通知栏:" />
 
             <Button
                 android:id="@+id/btn_colloct_notify"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="@{onClickEvent.collNotify}"
+                android:onClick="@{viewModel.collNotify}"
                 android:text="收缩通知栏:" />
 
             <Button
                 android:id="@+id/btn_download"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="@{onClickEvent.onClickNotify3}"
-                android:text="下载文件通知" />
+                android:onClick="@{viewModel.onClickNotify3}"
+                android:text="@{viewModel.loadingText}" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="@{onClickEvent.onClickNotify4}"
+                android:onClick="@{viewModel.onClickNotify4}"
                 android:text="网络get" />
 
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="@{onClickEvent.onClickNotify5}"
+                android:onClick="@{viewModel.onClickNotify5}"
                 android:text="网络post" />
 
             <Button
                 android:id="@+id/notify1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="@{onClickEvent.onClickNotify1}"
+                android:onClick="@{viewModel.onClickNotify1}"
                 android:text="发送通知类型1" />
 
             <Button
                 android:id="@+id/notify2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="@{onClickEvent.onClickNotify2}"
+                android:onClick="@{viewModel.onClickNotify2}"
                 android:text="发送通知类型2" />
 
             <Button
                 android:id="@+id/xiaomi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="@{onClickEvent.onClickXiaoMi}"
+                android:onClick="@{viewModel.onClickXiaoMi}"
                 android:text="小米" />
 
             <Button
                 android:id="@+id/huawei"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="@{onClickEvent.onClickHuaWei}"
+                android:onClick="@{viewModel.onClickHuaWei}"
                 android:text="华为" />
 
             <Button
@@ -134,35 +134,35 @@
                 android:id="@+id/others"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="@{onClickEvent.onClickOther}"
+                android:onClick="@{viewModel.onClickOther}"
                 android:text="其他" />
 
             <Button
                 android:id="@+id/service"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="@{onClickEvent.buildSerivce}"
+                android:onClick="@{viewModel.buildSerivce}"
                 android:text="服务端" />
 
             <Button
                 android:id="@+id/client"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="@{onClickEvent.buildClient}"
+                android:onClick="@{viewModel.buildClient}"
                 android:text="客户端" />
 
             <Button
                 android:id="@+id/stopService"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="@{onClickEvent.stopReceiveClient}"
+                android:onClick="@{viewModel.stopReceiveClient}"
                 android:text="服务端停止接受客户端的上线确认反馈" />
 
             <TextView
                 android:id="@+id/showTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="show" />
+                android:text="@{viewModel.showTextView}" />
 
         </com.google.android.flexbox.FlexboxLayout>
 
@@ -170,6 +170,7 @@
             android:id="@+id/iv_test"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:url="@{viewModel.phonePath}"
             android:layout_gravity="bottom" />
 
     </FrameLayout>

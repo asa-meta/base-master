@@ -44,6 +44,9 @@ dependencies {
     api rootProject.ext.dependencies.rxbinding
     api rootProject.ext.dependencies.rxpermissions
 
+    api rootProject.ext.dependencies["glide"]
+    annotationProcessor rootProject.ext.dependencies["glide-compiler"]
+
     api rootProject.ext.support["annotations"]
     annotationProcessor rootProject.ext.dependencies["dagger-compiler-processor"]
     annotationProcessor rootProject.ext.dependencies["dagger-android-processor"]

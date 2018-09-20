@@ -45,6 +45,7 @@ dependencies {
     implementation rootProject.ext.dependencies["disklrucache"]
     api rootProject.ext.dependencies["ucrop"]
     api rootProject.ext.dependencies["glide"]
+    implementation rootProject.ext.dependencies.rxpermissions
     annotationProcessor rootProject.ext.dependencies["glide-compiler"]
 
 

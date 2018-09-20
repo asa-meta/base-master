@@ -1,5 +1,7 @@
 package com.asa.meta.basehabit.base;
 
+import android.content.Intent;
+
 public interface IBaseViewModel {
 //    void initData();
 
@@ -22,4 +24,7 @@ public interface IBaseViewModel {
      * 移除RxBus
      */
     void removeRxBus();
+
+
+    void onActivityResult(int requestCode, int resultCode, Intent data);
 }

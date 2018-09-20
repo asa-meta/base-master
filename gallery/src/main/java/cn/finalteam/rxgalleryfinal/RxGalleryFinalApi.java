@@ -1,5 +1,6 @@
 package cn.finalteam.rxgalleryfinal;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
@@ -12,6 +13,7 @@ import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.widget.Toast;
 
+import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.yalantis.ucrop.UCrop;
 import com.yalantis.ucrop.UCropActivity;
 
@@ -32,6 +34,7 @@ import cn.finalteam.rxgalleryfinal.ui.fragment.MediaGridFragment;
 import cn.finalteam.rxgalleryfinal.utils.Logger;
 import cn.finalteam.rxgalleryfinal.utils.MediaScanner;
 import cn.finalteam.rxgalleryfinal.utils.SimpleDateUtils;
+import io.reactivex.functions.Consumer;
 
 /**
  * 设置回调
@@ -235,11 +238,36 @@ public class RxGalleryFinalApi {
      * <p>
      * 返回值： -1 ： 设备没有相机
      */
+    public static void openCamera(Fragment fragment) {
+        RxPermissions rxPermissions = new RxPermissions(fragment.getActivity());
+        rxPermissions.request(Manifest.permission.CAMERA).subscribe(new Consumer<Boolean>() {
+            @Override
+            public void accept(Boolean aBoolean) throws Exception {
+                if (aBoolean) {
+                    openZKCamera(fragment);
+                }
+            }
+        });
+    }
+
+    public static void openCamera(Activity activity) {
+        RxPermissions rxPermissions = new RxPermissions(activity);
+        rxPermissions.request(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE).subscribe(new Consumer<Boolean>() {
+            @Override
+            public void accept(Boolean aBoolean) throws Exception {
+                if (aBoolean) {
+                    openZKCamera(activity);
+                }
+            }
+        });
+    }
+
     public static int openZKCamera(Object activity) {
 
         if (activity == null) {
             throw new NullPointerException("activity == null");
         }
+
         Activity cameraActivity = null;
         if (activity instanceof Activity) {
             cameraActivity = (Activity) activity;

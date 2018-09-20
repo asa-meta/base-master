@@ -1,18 +1,28 @@
 package com.asa.meta.basehabit.base;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 
 
 public class BaseViewModel implements IBaseViewModel {
     protected Context context;
     protected Fragment fragment;
+    public String TAG = "";
+    protected Activity activity;
 
-    public BaseViewModel() {
+    private BaseViewModel() {
     }
 
-    public BaseViewModel(Context context) {
+    private BaseViewModel(Context context) {
         this.context = context;
+        TAG = getClass().getSimpleName();
+    }
+
+    public BaseViewModel(Activity activity) {
+        this(activity.getBaseContext());
+        this.activity = activity;
     }
 
     public BaseViewModel(Fragment fragment) {
@@ -22,6 +32,7 @@ public class BaseViewModel implements IBaseViewModel {
 
     @Override
     public void onCreate() {
+
     }
 
     @Override
@@ -35,4 +46,11 @@ public class BaseViewModel implements IBaseViewModel {
     @Override
     public void removeRxBus() {
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+    }
+
+
 }
