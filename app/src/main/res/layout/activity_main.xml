@@ -28,6 +28,12 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="@{viewModel.changeLanguage}"
+                android:text="@{viewModel.language}" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:onClick="@{viewModel.onClickOpenGallery}"
                 android:text="打开图册" />
 
@@ -170,7 +176,7 @@
             android:id="@+id/iv_test"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:url="@{viewModel.phonePath}"
+            app:url="@{viewModel.phonePath?view.}"
             android:layout_gravity="bottom" />
 
     </FrameLayout>

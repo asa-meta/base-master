@@ -1,5 +1,7 @@
 package com.asa.meta.rxhttp.request;
 
+import android.util.Log;
+
 import com.asa.meta.rxhttp.body.ProgressResponseCallBack;
 import com.asa.meta.rxhttp.body.RequestBodyUtils;
 import com.asa.meta.rxhttp.body.UploadProgressRequestBody;
@@ -121,25 +123,33 @@ public abstract class BaseBodyRequest<R extends BaseBodyRequest> extends BaseReq
         return (R) this;
     }
 
+    private String TAG = "TEST";
     @Override
     protected Observable<ResponseBody> generateRequest() {
         if (this.requestBody != null) { //自定义的请求体
+            Log.i(TAG, "自定义的请求体: ");
             return apiManager.postBody(url, this.requestBody);
         } else if (this.json != null) {//上传的Json
+            Log.i(TAG, "//上传的Json: ");
             RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), this.json);
             return apiManager.postJson(url, body);
         } else if (this.object != null) {//自定义的请求object
+            Log.i(TAG, "//自定义的请求object: ");
             return apiManager.postBody(url, object);
         } else if (this.string != null) {//上传的文本内容
+            Log.i(TAG, "//上传的文本内容");
             RequestBody body = RequestBody.create(mediaType, this.string);
             return apiManager.postBody(url, body);
         } else if (this.bs != null) {//上传的字节数据
+            Log.i(TAG, "//上传的字节数据");
             RequestBody body = RequestBody.create(MediaType.parse("application/octet-stream"), this.bs);
             return apiManager.postBody(url, body);
         }
         if (params.fileParamsMap.isEmpty()) {
+            Log.i(TAG, "//上传的字节数据1");
             return apiManager.post(url, params.urlParamsMap);
         } else {
+            Log.i(TAG, "//上传的字节数2");
             if (currentUploadType == UploadType.PART) {//part方式上传
                 return uploadFilesWithParts();
             } else {//body方式上传

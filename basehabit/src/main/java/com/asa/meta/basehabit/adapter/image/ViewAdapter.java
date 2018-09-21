@@ -1,6 +1,7 @@
 package com.asa.meta.basehabit.adapter.image;
 
 import android.databinding.BindingAdapter;
+import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.widget.ImageView;
 
@@ -17,5 +18,15 @@ public final class ViewAdapter {
                     .apply(new RequestOptions().placeholder(placeholderRes))
                     .into(imageView);
         }
+    }
+
+    @BindingAdapter(value = {"drawable", "placeholderRes"}, requireAll = false)
+    public static void setImageUri(ImageView imageView, Drawable drawable, int placeholderRes) {
+        //使用Glide框架加载图片
+        Glide.with(imageView.getContext())
+                .load(drawable)
+                .apply(new RequestOptions().placeholder(placeholderRes))
+                .into(imageView);
+
     }
 }

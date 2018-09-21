@@ -5,6 +5,7 @@ import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 
+import com.asa.meta.helpers.app.AppManager;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 
@@ -18,6 +19,7 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         TAG = getClass().getSimpleName();
+        AppManager.getAppManager().addActivity(this);
         initParam();
 
         initViewDataBinding(savedInstanceState);
@@ -34,7 +36,7 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
+        AppManager.getAppManager().removeActivity(this);
         viewModel.removeRxBus();
         viewModel.onDestroy();
         if (viewModel.context != null) {

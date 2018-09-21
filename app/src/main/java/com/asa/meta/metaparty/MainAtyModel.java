@@ -3,16 +3,20 @@ package com.asa.meta.metaparty;
 import android.app.Activity;
 import android.content.Intent;
 import android.databinding.ObservableField;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.asa.meta.basehabit.base.BaseViewModel;
+import com.asa.meta.helpers.app.AppManager;
 import com.asa.meta.helpers.files.FileUtils;
 import com.asa.meta.helpers.files.InstallApkUtils;
+import com.asa.meta.helpers.files.SharedPreferencesManager;
 import com.asa.meta.helpers.notify.NotifyHelper;
 import com.asa.meta.helpers.notify.NotifySettingUtils;
 import com.asa.meta.helpers.os.OSRomUtils;
@@ -46,7 +50,9 @@ public class MainAtyModel extends BaseViewModel implements ProgressDialog {
     public ObservableField<String> notifyPermissionText = new ObservableField<>("点击检查通知权限");
     public ObservableField<String> loadingText = new ObservableField<>("点击下载文件");
     public ObservableField<String> showTextView = new ObservableField<>("显示数据的view");
-    public ObservableField<String> phonePath = new ObservableField<>("");
+    public ObservableField<String> phonePath = new ObservableField<>();
+    public ObservableField<Drawable> phoneDrawablePath = new ObservableField<>();
+    public ObservableField<String> language = new ObservableField<>();
     private int i;
 
     public MainAtyModel(Activity activity) {
@@ -56,7 +62,17 @@ public class MainAtyModel extends BaseViewModel implements ProgressDialog {
     @Override
     public void onCreate() {
         super.onCreate();
+        initLanguage();
         initGallery();
+
+    }
+
+    private void initLanguage() {
+        if (!SharedPreferencesManager.hasValue("test")) {
+            SharedPreferencesManager.putValue("test", "zh");
+        }
+        language.set(context.getString(R.string.language));
+        phoneDrawablePath.set(ContextCompat.getDrawable(context, R.drawable.logo));
     }
 
     private void initGallery() {
@@ -86,6 +102,22 @@ public class MainAtyModel extends BaseViewModel implements ProgressDialog {
                                 Toast.makeText(context, "你最多只能选择" + maxSize + "张图片", Toast.LENGTH_SHORT).show();
                             }
                         });
+    }
+
+    public void changeLanguage(View view) {
+        if (SharedPreferencesManager.getValue("test").equals("zh")) {
+            SharedPreferencesManager.putValue("test", "pt");
+
+
+        } else {
+            SharedPreferencesManager.putValue("test", "zh");
+
+        }
+        language.set(context.getString(R.string.language));
+        AppManager.getAppManager().keepActivity(MainActivity.class);
+        Intent intent = new Intent(context, MainActivity.class);
+        context.startActivity(intent);
+        activity.finish();
     }
 
     public void buildSerivce(View view) {
@@ -199,7 +231,6 @@ public class MainAtyModel extends BaseViewModel implements ProgressDialog {
 
                         if (done) {//下载完成
                             HttpLog.e("下载完成");
-
                         }
                     }
 

@@ -3,6 +3,7 @@ package com.asa.meta.helpers.app;
 import android.app.Activity;
 import android.support.v4.app.Fragment;
 
+import java.util.Iterator;
 import java.util.Stack;
 
 public class AppManager {
@@ -100,6 +101,31 @@ public class AppManager {
         }
         activityStack.clear();
     }
+
+
+    /**
+     * 保持Activity
+     */
+
+    public void keepActivity(Class<?>... cls) {
+        Iterator iter = activityStack.iterator();
+        while (iter.hasNext()) {
+            Activity activity = (Activity) iter.next();
+            Class[] var4 = cls;
+            int var5 = cls.length;
+            for (int var6 = 0; var6 < var5; ++var6) {
+                Class<?> cla = var4[var6];
+                if (activity.getClass().equals(cla) && !activity.isFinishing()) {
+                    iter.remove();
+                    activity.finish();
+                    break;
+                }
+            }
+        }
+
+
+    }
+
 
     /**
      * 获取指定的Activity
