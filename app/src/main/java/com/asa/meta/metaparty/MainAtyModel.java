@@ -65,6 +65,7 @@ public class MainAtyModel extends BaseViewModel implements ProgressDialog {
         initLanguage();
         initGallery();
 
+
     }
 
     private void initLanguage() {
@@ -107,8 +108,6 @@ public class MainAtyModel extends BaseViewModel implements ProgressDialog {
     public void changeLanguage(View view) {
         if (SharedPreferencesManager.getValue("test").equals("zh")) {
             SharedPreferencesManager.putValue("test", "pt");
-
-
         } else {
             SharedPreferencesManager.putValue("test", "zh");
 
@@ -314,8 +313,6 @@ public class MainAtyModel extends BaseViewModel implements ProgressDialog {
     }
 
     public void openCamera(View view) {
-
-
         SimpleRxGalleryFinal.get().init(new SimpleRxGalleryFinal.RxGalleryFinalCropListener() {
             @NonNull
             @Override

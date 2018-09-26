@@ -33,8 +33,11 @@ dependencies {
     implementation rootProject.ext.support["appcompat-v7"]
     implementation rootProject.ext.support["recyclerview-v7"]
     implementation rootProject.ext.support["design"]
+    implementation rootProject.ext.dependencies["textdrawable"]
+    implementation rootProject.ext.dependencies["SuperTextView"]
 
     implementation project(':rxhttp')
+
     api project(path: ':basehabit')
     api project(path: ':gallery')
 }

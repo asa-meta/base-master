@@ -8,177 +8,207 @@
             type="com.asa.meta.metaparty.MainAtyModel" />
     </data>
 
-    <FrameLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <com.google.android.flexbox.FlexboxLayout
+        android:layout_height="wrap_content">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:alignContent="flex_start"
-            app:alignItems="flex_start"
-            app:flexWrap="wrap"
-            app:justifyContent="flex_start">
+            android:background="#ffffff"
+            android:orientation="vertical">
 
-            <Button
-                android:layout_width="wrap_content"
+            <com.google.android.flexbox.FlexboxLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="@{viewModel.check}"
-                android:text="版本识别》》1" />
+                app:alignContent="flex_start"
+                app:alignItems="flex_start"
+                app:flexWrap="wrap"
+                app:justifyContent="flex_start">
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="@{viewModel.changeLanguage}"
-                android:text="@{viewModel.language}" />
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{viewModel.check}"
+                    android:text="版本识别》》1" />
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="@{viewModel.onClickOpenGallery}"
-                android:text="打开图册" />
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{viewModel.changeLanguage}"
+                    android:text="@{viewModel.language}" />
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="@{viewModel.openCamera}"
-                android:text="打开相机" />
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{viewModel.onClickOpenGallery}"
+                    android:text="打开图册" />
 
-            <Button
-                android:id="@+id/btn_check_notify"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="@{viewModel.checkNotify}"
-                android:text="@{viewModel.notifyPermissionText}" />
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{viewModel.openCamera}"
+                    android:text="打开相机" />
 
-            <Button
-                android:id="@+id/btn_expend_notify"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="@{viewModel.expNotify}"
-                android:text="展开通知栏:" />
+                <Button
+                    android:id="@+id/btn_check_notify"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{viewModel.checkNotify}"
+                    android:text="@{viewModel.notifyPermissionText}" />
 
-            <Button
-                android:id="@+id/btn_colloct_notify"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="@{viewModel.collNotify}"
-                android:text="收缩通知栏:" />
+                <Button
+                    android:id="@+id/btn_expend_notify"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{viewModel.expNotify}"
+                    android:text="展开通知栏:" />
 
-            <Button
-                android:id="@+id/btn_download"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="@{viewModel.onClickNotify3}"
-                android:text="@{viewModel.loadingText}" />
+                <Button
+                    android:id="@+id/btn_colloct_notify"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{viewModel.collNotify}"
+                    android:text="收缩通知栏:" />
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="@{viewModel.onClickNotify4}"
-                android:text="网络get" />
+                <Button
+                    android:id="@+id/btn_download"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{viewModel.onClickNotify3}"
+                    android:text="@{viewModel.loadingText}" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{viewModel.onClickNotify4}"
+                    android:text="网络get" />
 
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="@{viewModel.onClickNotify5}"
-                android:text="网络post" />
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{viewModel.onClickNotify5}"
+                    android:text="网络post" />
 
-            <Button
-                android:id="@+id/notify1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="@{viewModel.onClickNotify1}"
-                android:text="发送通知类型1" />
+                <Button
+                    android:id="@+id/notify1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{viewModel.onClickNotify1}"
+                    android:text="发送通知类型1" />
 
-            <Button
-                android:id="@+id/notify2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="@{viewModel.onClickNotify2}"
-                android:text="发送通知类型2" />
+                <Button
+                    android:id="@+id/notify2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{viewModel.onClickNotify2}"
+                    android:text="发送通知类型2" />
 
-            <Button
-                android:id="@+id/xiaomi"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="@{viewModel.onClickXiaoMi}"
-                android:text="小米" />
+                <Button
+                    android:id="@+id/xiaomi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{viewModel.onClickXiaoMi}"
+                    android:text="小米" />
 
-            <Button
-                android:id="@+id/huawei"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="@{viewModel.onClickHuaWei}"
-                android:text="华为" />
+                <Button
+                    android:id="@+id/huawei"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{viewModel.onClickHuaWei}"
+                    android:text="华为" />
 
-            <Button
-                android:id="@+id/meizhu"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="魅族" />
+                <Button
+                    android:id="@+id/meizhu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="魅族" />
 
-            <Button
-                android:id="@+id/oppo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="oppo" />
+                <Button
+                    android:id="@+id/oppo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="oppo" />
 
-            <Button
-                android:id="@+id/samsung"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="三星" />
+                <Button
+                    android:id="@+id/samsung"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="三星" />
 
-            <Button
-                android:id="@+id/oneplus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="一加" />
+                <Button
+                    android:id="@+id/oneplus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="一加" />
 
-            <Button
-                android:id="@+id/others"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="@{viewModel.onClickOther}"
-                android:text="其他" />
+                <Button
+                    android:id="@+id/others"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{viewModel.onClickOther}"
+                    android:text="其他" />
 
-            <Button
-                android:id="@+id/service"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="@{viewModel.buildSerivce}"
-                android:text="服务端" />
+                <Button
+                    android:id="@+id/service"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{viewModel.buildSerivce}"
+                    android:text="服务端" />
 
-            <Button
-                android:id="@+id/client"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="@{viewModel.buildClient}"
-                android:text="客户端" />
+                <Button
+                    android:id="@+id/client"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{viewModel.buildClient}"
+                    android:text="客户端" />
 
-            <Button
-                android:id="@+id/stopService"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="@{viewModel.stopReceiveClient}"
-                android:text="服务端停止接受客户端的上线确认反馈" />
+                <Button
+                    android:id="@+id/stopService"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{viewModel.stopReceiveClient}"
+                    android:text="服务端停止接受客户端的上线确认反馈" />
 
-            <TextView
-                android:id="@+id/showTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{viewModel.showTextView}" />
+                <TextView
+                    android:id="@+id/showTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.showTextView}" />
 
-        </com.google.android.flexbox.FlexboxLayout>
+            </com.google.android.flexbox.FlexboxLayout>
 
-        <ImageView
-            android:id="@+id/iv_test"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:url="@{viewModel.phonePath?view.}"
-            android:layout_gravity="bottom" />
+            <ImageView
+                android:id="@+id/iv_test"
+                android:layout_width="@dimen/dp_140"
+                android:layout_height="@dimen/dp_140" />
 
-    </FrameLayout>
+            <com.coorchice.library.SuperTextView
+                android:layout_width="@dimen/dp_140"
+                android:layout_height="@dimen/dp_140"
+                android:layout_marginTop="@dimen/dp_10"
+                android:text="a"
+                android:textColor="@color/white"
+                android:textSize="@dimen/dp_14"
+                app:corner="@dimen/dp_140"
+                app:drawableAsBackground="true"
+                app:isShowState="true"
+                app:solid="@color/black"
+                app:state_drawable_height="@dimen/dp_140"
+                app:state_drawable_width="@dimen/dp_140" />
+
+            <com.asa.meta.metaparty.GroupView
+                android:id="@+id/test_group"
+                android:layout_width="@dimen/dp_140"
+                android:layout_height="@dimen/dp_140"
+                android:layout_gravity="center_horizontal"
+                app:backgroundGP="#ffffff"
+                app:types="circles" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
 
 </layout>

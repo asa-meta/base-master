@@ -52,6 +52,8 @@ dependencies {
     annotationProcessor rootProject.ext.dependencies["dagger-android-processor"]
     api rootProject.ext.dependencies["dagger-compiler"]
     api rootProject.ext.dependencies["dagger-android"]
-
+    api rootProject.ext.dependencies["lifecycle-extensions"]
+    api rootProject.ext.dependencies["lifecycle-reactivestreams"]
+    annotationProcessor rootProject.ext.dependencies["lifecycle-compiler"]
     api project(path: ':helpers')
 }
