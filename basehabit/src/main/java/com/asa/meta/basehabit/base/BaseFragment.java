@@ -19,7 +19,6 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         TAG = getClass().getSimpleName();
-        initParam();
     }
 
     @Nullable
@@ -58,10 +57,7 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
         binding.unbind();
     }
 
-    @Override
-    public void initParam() {
 
-    }
 
     //刷新布局
     public void refreshLayout() {

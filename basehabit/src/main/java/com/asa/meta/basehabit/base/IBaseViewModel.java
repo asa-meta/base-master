@@ -2,34 +2,35 @@ package com.asa.meta.basehabit.base;
 
 import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleObserver;
+import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.OnLifecycleEvent;
 import android.content.Intent;
 
 public interface IBaseViewModel extends LifecycleObserver {
-//    void initData();
+    @OnLifecycleEvent(Lifecycle.Event.ON_ANY)
+    void onAny(LifecycleOwner owner, Lifecycle.Event event);
 
-    /**
-     * View的界面创建时回调
-     */
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     void onCreate();
 
-    /**
-     * View的界面销毁时回调
-     */
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     void onDestroy();
 
-    /**
-     * 注册RxBus
-     */
+    @OnLifecycleEvent(Lifecycle.Event.ON_START)
+    void onStart();
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+    void onStop();
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
+    void onResume();
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
+    void onPause();
+
     void registerRxBus();
 
-    /**
-     * 移除RxBus
-     */
     void removeRxBus();
-
 
     void onActivityResult(int requestCode, int resultCode, Intent data);
 }
