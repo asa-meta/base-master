@@ -1,8 +1,8 @@
 package com.asa.meta.metaparty;
 
 import android.app.Activity;
+import android.arch.lifecycle.MutableLiveData;
 import android.content.Intent;
-import android.databinding.ObservableField;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.annotation.NonNull;
@@ -47,12 +47,12 @@ import cn.finalteam.rxgalleryfinal.ui.base.IMultiImageCheckedListener;
 import cn.finalteam.rxgalleryfinal.ui.base.IRadioImageCheckedListener;
 
 public class MainAtyModel extends BaseViewModel implements ProgressDialog {
-    public ObservableField<String> notifyPermissionText = new ObservableField<>("点击检查通知权限");
-    public ObservableField<String> loadingText = new ObservableField<>("点击下载文件");
-    public ObservableField<String> showTextView = new ObservableField<>("显示数据的view");
-    public ObservableField<String> phonePath = new ObservableField<>();
-    public ObservableField<Drawable> phoneDrawablePath = new ObservableField<>();
-    public ObservableField<String> language = new ObservableField<>();
+    public MutableLiveData<String> notifyPermissionText = new MutableLiveData<>();
+    public MutableLiveData<String> loadingText = new MutableLiveData<>();
+    public MutableLiveData<String> showTextView = new MutableLiveData<>();
+    public MutableLiveData<String> phonePath = new MutableLiveData<>();
+    public MutableLiveData<Drawable> phoneDrawablePath = new MutableLiveData<>();
+    public MutableLiveData<String> language = new MutableLiveData<>();
     private int i;
 
     public MainAtyModel(Activity activity) {
@@ -64,7 +64,9 @@ public class MainAtyModel extends BaseViewModel implements ProgressDialog {
         super.onCreate();
         initLanguage();
         initGallery();
-
+        notifyPermissionText.setValue("点击检查通知权限");
+        loadingText.setValue("点击下载文件");
+        showTextView.setValue("显示数据的view");
 
     }
 
@@ -72,8 +74,8 @@ public class MainAtyModel extends BaseViewModel implements ProgressDialog {
         if (!SharedPreferencesManager.hasValue("test")) {
             SharedPreferencesManager.putValue("test", "zh");
         }
-        language.set(context.getString(R.string.language));
-        phoneDrawablePath.set(ContextCompat.getDrawable(context, R.drawable.logo));
+        language.setValue(context.getString(R.string.language));
+        phoneDrawablePath.setValue(ContextCompat.getDrawable(context, R.drawable.logo));
     }
 
     private void initGallery() {
@@ -112,7 +114,7 @@ public class MainAtyModel extends BaseViewModel implements ProgressDialog {
             SharedPreferencesManager.putValue("test", "zh");
 
         }
-        language.set(context.getString(R.string.language));
+        language.setValue(context.getString(R.string.language));
         AppManager.getAppManager().keepActivity(MainActivity.class);
         Intent intent = new Intent(context, MainActivity.class);
         context.startActivity(intent);
@@ -182,9 +184,7 @@ public class MainAtyModel extends BaseViewModel implements ProgressDialog {
     }
 
     public void checkNotify(View view) {
-
-        notifyPermissionText.set("是否有通知权限：" + NotifySettingUtils.hasNotifyPermission(context));
-
+        notifyPermissionText.setValue("是否有通知权限：" + NotifySettingUtils.hasNotifyPermission(context));
     }
 
     public void onClickNotify2(View view) {
@@ -205,14 +205,14 @@ public class MainAtyModel extends BaseViewModel implements ProgressDialog {
                     @Override
                     public void onStart() {
                         HttpLog.e("下载开始");
-                        loadingText.set("下载开始");
+                        loadingText.setValue("下载开始");
                         NotifyController.notifyProgressStart(notifyHelper).notifyProgress(0);
                     }
 
                     @Override
                     public void onError(ApiException e) {
                         HttpLog.e("下载错误" + e.getMessage());
-                        loadingText.set("下载错误");
+                        loadingText.setValue("下载错误");
                         NotifyController.notifyProgressFail(notifyHelper, e.getMessage()).notifyProgressEnd();
                     }
 
@@ -226,7 +226,7 @@ public class MainAtyModel extends BaseViewModel implements ProgressDialog {
                         cacheProgress = progress;
                         HttpLog.e(progress + "% ");
                         NotifyController.notifyProgressIng(notifyHelper).notifyProgress(progress);
-                        loadingText.set(progress + "%");
+                        loadingText.setValue(progress + "%");
 
                         if (done) {//下载完成
                             HttpLog.e("下载完成");
@@ -238,7 +238,7 @@ public class MainAtyModel extends BaseViewModel implements ProgressDialog {
                         HttpLog.e("保存的路径" + path);
                         File file = new File(path);
                         if (FileUtils.checkFile(file) && InstallApkUtils.checkApkFile(context, file.getPath())) {
-                            loadingText.set("下载完成:点击重新下载");
+                            loadingText.setValue("下载完成:点击重新下载");
                             NotifyController.notifyProgressEnd(notifyHelper, context, file).notifyProgressEnd();
                             InstallApkUtils.install(context, file);
                         }
@@ -261,7 +261,7 @@ public class MainAtyModel extends BaseViewModel implements ProgressDialog {
                     @Override
                     public void onSuccess(JSONObject jsonObject) {
                         HttpLog.e(Thread.currentThread().getName());
-                        showTextView.set(jsonObject.toString());
+                        showTextView.setValue(jsonObject.toString());
                     }
                 });
     }
@@ -274,7 +274,7 @@ public class MainAtyModel extends BaseViewModel implements ProgressDialog {
                 .subscribe(new JSONObjectSubscriber(TAG) {
                     @Override
                     public void onSuccess(JSONObject jsonObject) {
-                        showTextView.set(jsonObject.toString());
+                        showTextView.setValue(jsonObject.toString());
                     }
 
                     @Override
@@ -328,7 +328,7 @@ public class MainAtyModel extends BaseViewModel implements ProgressDialog {
             @Override
             public void onCropSuccess(@Nullable Uri uri) {
                 Log.i(TAG, "onCropSuccess: " + uri.getPath());
-                phonePath.set(uri.getPath());
+                phonePath.setValue(uri.getPath());
             }
 
             @Override

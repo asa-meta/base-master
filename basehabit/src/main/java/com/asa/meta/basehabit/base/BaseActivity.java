@@ -5,7 +5,6 @@ import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 
-import com.asa.meta.helpers.app.AppManager;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 
@@ -19,26 +18,15 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         TAG = getClass().getSimpleName();
-        AppManager.getAppManager().addActivity(this);
         initParam();
-
         initViewDataBinding(savedInstanceState);
-
         initData();
-
         initViewObservable();
-
-        viewModel.onCreate();
-
-        viewModel.registerRxBus();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        AppManager.getAppManager().removeActivity(this);
-        viewModel.removeRxBus();
-        viewModel.onDestroy();
         if (viewModel.context != null) {
             viewModel.context = null;
         }
@@ -49,13 +37,11 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
         binding.unbind();
     }
 
-    /**
-     * 注入绑定
-     */
+
     private void initViewDataBinding(Bundle savedInstanceState) {
-        //DataBindingUtil类需要在project的build中配置 dataBinding {enabled true }, 同步后会自动关联android.databinding包
         binding = DataBindingUtil.setContentView(this, initContentView(savedInstanceState));
         binding.setVariable(initVariableId(), viewModel = initViewModel());
+        binding.setLifecycleOwner(this);
     }
 
     //刷新布局

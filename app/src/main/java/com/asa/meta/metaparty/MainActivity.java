@@ -2,6 +2,7 @@ package com.asa.meta.metaparty;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.asa.meta.basehabit.base.BaseActivity;
 import com.asa.meta.helpers.files.SharedPreferencesManager;
@@ -36,5 +37,15 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainAtyModel
 
     }
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Log.i(TAG, "onCreate: ");
+    }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.i(TAG, "onDestroy: ");
+    }
 }
