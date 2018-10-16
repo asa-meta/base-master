@@ -1,4 +1,4 @@
-package com.asa.meta.metaparty;
+package com.asa.meta.metaparty.controller;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -9,6 +9,7 @@ import android.graphics.Color;
 import com.asa.meta.helpers.files.InstallApkUtils;
 import com.asa.meta.helpers.notify.NotifyHelper;
 import com.asa.meta.helpers.notify.NotifySettingUtils;
+import com.asa.meta.metaparty.R;
 
 import java.io.File;
 

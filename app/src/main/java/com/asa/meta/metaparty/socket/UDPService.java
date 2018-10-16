@@ -4,7 +4,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.asa.meta.helpers.os.NetUtils;
-import com.asa.meta.metaparty.BaseApplication;
+import com.asa.meta.metaparty.application.BaseApplication;
 
 import java.io.IOException;
 import java.net.DatagramPacket;

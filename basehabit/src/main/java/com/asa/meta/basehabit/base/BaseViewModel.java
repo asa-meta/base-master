@@ -1,42 +1,37 @@
 package com.asa.meta.basehabit.base;
 
-import android.app.Activity;
-import android.content.Context;
+import android.app.Application;
+import android.arch.lifecycle.AndroidViewModel;
 import android.content.Intent;
-import android.support.v4.app.Fragment;
+import android.support.annotation.NonNull;
+import android.util.Log;
 
 
-public class BaseViewModel implements IBaseViewModel {
-    protected Context context;
-    protected Fragment fragment;
+public class BaseViewModel extends AndroidViewModel implements IBaseViewModel {
     public String TAG = "";
-    protected Activity activity;
 
-    private BaseViewModel() {
-    }
-
-    private BaseViewModel(Context context) {
-        this.context = context;
+    public BaseViewModel(@NonNull Application application) {
+        super(application);
         TAG = getClass().getSimpleName();
     }
 
-    public BaseViewModel(Activity activity) {
-        this(activity.getBaseContext());
-        this.activity = activity;
+
+    public void initData() {
+
     }
 
-    public BaseViewModel(Fragment fragment) {
-        this(fragment.getContext());
-        this.fragment = fragment;
-    }
 
     @Override
     public void onCreate() {
-
+        Log.i(TAG, "onCreate: ");
+        registerRxBus();
     }
+
 
     @Override
     public void onDestroy() {
+        Log.i(TAG, "onDestroy: ");
+        removeRxBus();
     }
 
     @Override

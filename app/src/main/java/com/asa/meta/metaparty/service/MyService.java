@@ -1,4 +1,4 @@
-package com.asa.meta.metaparty;
+package com.asa.meta.metaparty.service;
 
 import android.app.Notification;
 import android.app.Service;
@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.util.Log;
+
+import com.asa.meta.metaparty.controller.NotifyController;
 
 public class MyService extends Service {
     String TAG = getClass().getSimpleName();

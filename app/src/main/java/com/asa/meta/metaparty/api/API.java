@@ -1,4 +1,4 @@
-package com.asa.meta.metaparty;
+package com.asa.meta.metaparty.api;
 
 public final class API {
     //    public static final String MAIN_URL = "https://192.168.1.25:8443/";
