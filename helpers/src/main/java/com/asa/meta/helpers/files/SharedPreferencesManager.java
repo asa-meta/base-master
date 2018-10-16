@@ -11,8 +11,22 @@ public class SharedPreferencesManager {
 
     private final static String MAIN_PREFERENCES_KEY = "SharedPreferencesManager_asa";
 
+
     public static boolean putValue(String key, Object object) {
-        SharedPreferences sp = getSharedPreferences(Utils.context);
+        return putValue(Utils.context, key, object);
+    }
+
+    public static boolean hasValue(String key) {
+        return hasValue(Utils.context, key);
+    }
+
+    public static String getValue(String key) {
+        return getValue(Utils.context, key);
+    }
+
+
+    public static boolean putValue(Context context, String key, Object object) {
+        SharedPreferences sp = getSharedPreferences(context);
         if (sp == null) {
             return false;
         }
@@ -39,13 +53,13 @@ public class SharedPreferencesManager {
         return true;
     }
 
-    public static boolean hasValue(String key) {
-        SharedPreferences sp = getSharedPreferences(Utils.context);
+    public static boolean hasValue(Context context, String key) {
+        SharedPreferences sp = getSharedPreferences(context);
         return sp.contains(key);
     }
 
-    public static String getValue(String key) {
-        SharedPreferences sp = getSharedPreferences(Utils.context);
+    public static String getValue(Context context, String key) {
+        SharedPreferences sp = getSharedPreferences(context);
 
         return (sp != null) ? sp.getString(key, "") : "";
     }

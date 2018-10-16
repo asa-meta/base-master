@@ -1,8 +1,8 @@
 package com.asa.meta.metaparty.application;
 
-import android.app.Application;
 import android.content.Context;
 
+import com.asa.meta.basehabit.base.LanguageApplication;
 import com.asa.meta.helpers.Utils;
 import com.asa.meta.helpers.toast.ToastUtils;
 import com.asa.meta.metaparty.api.API;
@@ -10,7 +10,7 @@ import com.asa.meta.metaparty.controller.NotifyController;
 import com.asa.meta.rxhttp.cookie.CookieManger;
 import com.asa.meta.rxhttp.main.RxHttp;
 
-public class BaseApplication extends Application {
+public class BaseApplication extends LanguageApplication {
     private static Context context;
 
     public static Context getContext() {
