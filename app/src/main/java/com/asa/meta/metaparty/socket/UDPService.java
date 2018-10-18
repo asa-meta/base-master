@@ -3,8 +3,8 @@ package com.asa.meta.metaparty.socket;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.asa.meta.helpers.Utils;
 import com.asa.meta.helpers.os.NetUtils;
-import com.asa.meta.metaparty.application.BaseApplication;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
@@ -134,7 +134,7 @@ public class UDPService {
                             return false;
                         }
 
-                        if (recePack.getAddress().getHostAddress().equals(NetUtils.getIP(BaseApplication.getContext()))) {
+                        if (recePack.getAddress().getHostAddress().equals(NetUtils.getIP(Utils.context))) {
                             if (data.equals(Consts.stopReceive)) {
                                 stopKeepHeart();
                             }

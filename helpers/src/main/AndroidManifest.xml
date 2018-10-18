@@ -1,1 +1,11 @@
-<manifest package="com.asa.meta.helpers" />
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.asa.meta.helpers">
+
+    <application>
+        <provider
+            android:name=".HelperRuntimeProvider"
+            android:authorities="com.asa.meta.helpers.utils_init"
+            android:exported="false"
+            android:multiprocess="true" />
+    </application>
+</manifest>

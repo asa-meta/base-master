@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="items"
+            type="com.asa.meta.metaparty.model.SwitchModel.LanguageBean" />
+
+        <variable
+            name="listenner"
+            type="com.asa.meta.metaparty.viewmodel.SwitchLanguageModel.OnSwitchLanguageListenner" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:onClick="@{()->listenner.onClick(items)}">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="@dimen/dp_10"
+            android:text="@{items.language}"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold" />
+    </LinearLayout>
+</layout>

@@ -1,5 +1,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.asa.meta.rxhttp" >
-
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <application>
+        <provider
+            android:name=".RxHttpRuntimeProvider"
+            android:authorities="com.asa.meta.rxhttp.rxinit"
+            android:exported="false"
+            android:multiprocess="true" />
+    </application>
 </manifest>

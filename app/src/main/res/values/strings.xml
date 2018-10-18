@@ -1,9 +1,15 @@
 <resources>
     <string name="app_name">MetaParty</string>
     <string name="title_activity_main">MainActivity</string>
-    <string name="language">zh</string>
+
     <string name="phone_info">手机版本信息：%s</string>
     <string name="check_permission">点击检查通知权限</string>
     <string name="downloding_apk">点击下载文件</string>
     <string name="show_text">显示数据的view</string>
+    <string name="version_identification">版本识别</string>
+    <string name="open_album">打开图册</string>
+    <string name="turn_on_camera">打开相机</string>
+    <string name="expand_notification_bar">展开通知栏:</string>
+    <string name="contraction_notification_bar">收缩通知栏:</string>
+    <string name="language">切换语言</string>
 </resources>

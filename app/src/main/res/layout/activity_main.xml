@@ -3,10 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.asa.meta.metaparty.viewmodel.MainViewModel" />
     </data>
+
 
     <ScrollView
         android:layout_width="match_parent"
@@ -30,7 +32,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="@{()->viewModel.checkPhoneInfo()}"
-                    android:text="版本识别》》1" />
+                    android:text="@string/version_identification" />
 
                 <Button
                     android:layout_width="wrap_content"
@@ -42,13 +44,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="@{()->viewModel.openGallery()}"
-                    android:text="打开图册" />
+                    android:text="@string/open_album" />
 
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="@{()->viewModel.openCamera()}"
-                    android:text="打开相机" />
+                    android:text="@string/turn_on_camera" />
+
 
                 <Button
                     android:id="@+id/btn_check_notify"
@@ -62,14 +65,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="@{()->viewModel.expNotify()}"
-                    android:text="展开通知栏:" />
+                    android:text="@string/expand_notification_bar" />
 
                 <Button
                     android:id="@+id/btn_colloct_notify"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="@{()->viewModel.collNotify()}"
-                    android:text="收缩通知栏:" />
+                    android:text="@string/contraction_notification_bar" />
 
                 <Button
                     android:id="@+id/btn_download"
@@ -82,7 +85,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="@{()->viewModel.methodGet()}"
-                    android:text="网络get" />
+                    android:text="get" />
 
 
                 <Button
@@ -90,7 +93,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="@{()->viewModel.onClickNotify2()}"
-                    android:text="发送通知类型2" />
+                    android:text="发送通知类型" />
 
                 <Button
                     android:id="@+id/xiaomi"
@@ -148,7 +151,8 @@
             <ImageView
                 android:id="@+id/iv_test"
                 android:layout_width="@dimen/dp_140"
-                android:layout_height="@dimen/dp_140" />
+                android:layout_height="@dimen/dp_140"
+                app:url="@{viewModel.phonePath}" />
 
         </LinearLayout>
 

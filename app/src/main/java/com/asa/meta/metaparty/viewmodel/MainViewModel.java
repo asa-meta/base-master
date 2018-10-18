@@ -17,6 +17,7 @@ import com.asa.meta.helpers.os.OSRomUtils;
 import com.asa.meta.metaparty.R;
 import com.asa.meta.metaparty.controller.NotifyController;
 import com.asa.meta.metaparty.model.MainModel;
+import com.asa.meta.metaparty.view.activity.SwitchLanguageActivity;
 import com.asa.meta.rxhttp.callback.DownloadProgressCallBack;
 import com.asa.meta.rxhttp.exception.ApiException;
 import com.asa.meta.rxhttp.interfaces.ProgressDialog;
@@ -36,7 +37,6 @@ public class MainViewModel extends BaseViewModel implements ProgressDialog {
     public MutableLiveData<String> phonePath = new MutableLiveData<>();
     public MutableLiveData<Drawable> phoneDrawablePath = new MutableLiveData<>();
     public MutableLiveData<String> language = new MutableLiveData<>();
-    public MutableLiveData<Integer> switchLanguage = new MutableLiveData<>();
     public MutableLiveData<Boolean> openGallery = new MutableLiveData<>();
     public MutableLiveData<Boolean> openCamera = new MutableLiveData<>();
     private MainModel mainModel = new MainModel();
@@ -56,8 +56,7 @@ public class MainViewModel extends BaseViewModel implements ProgressDialog {
 
     //更换语言
     public void switchLanguage() {
-
-        switchLanguage.postValue(4);
+        startActivity(SwitchLanguageActivity.class);
     }
 
     //检查手机信息

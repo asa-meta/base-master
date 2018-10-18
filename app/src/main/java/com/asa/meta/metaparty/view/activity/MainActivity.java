@@ -11,7 +11,6 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.asa.meta.basehabit.base.LanguageActivity;
-import com.asa.meta.helpers.language.LocalManageUtil;
 import com.asa.meta.metaparty.BR;
 import com.asa.meta.metaparty.R;
 import com.asa.meta.metaparty.databinding.ActivityMainBinding;
@@ -51,14 +50,6 @@ public class MainActivity extends LanguageActivity<ActivityMainBinding, MainView
     @Override
     public void initViewObservable() {
         super.initViewObservable();
-
-        viewModel.switchLanguage.observe(this, new Observer<Integer>() {
-            @Override
-            public void onChanged(@Nullable Integer integer) {
-                LocalManageUtil.saveSelectLanguage(mContext, integer);
-                reStart(mContext);
-            }
-        });
 
         viewModel.openGallery.observe(this, new Observer<Boolean>() {
             @Override
@@ -107,6 +98,7 @@ public class MainActivity extends LanguageActivity<ActivityMainBinding, MainView
         RxGalleryListener.getInstance().setRadioImageCheckedListener(new IRadioImageCheckedListener() {
             @Override
             public void cropAfter(Object t) {
+                viewModel.setPhonePath(t.toString());
                 Log.i(TAG, "cropAfter: " + t.toString());
             }
 

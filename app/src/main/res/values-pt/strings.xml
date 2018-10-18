@@ -1,5 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">MetaParty</string>
-    <string name="title_activity_main">MainActivity</string>
-    <string name="language">pt</string>
+	<string name="app_name">MetaParty</string>
+	<string name="title_activity_main">MainActivity</string>
+	<string name="phone_info">Informações da versão para celular:% s</string>
+	<string name="check_permission">Clique para verificar as permissões de notificação</string>
+	<string name="downloding_apk">Clique para baixar o arquivo</string>
+	<string name="show_text">Visualização dos dados exibidos</string>
+	<string name="version_identification">Identificação de versão</string>
+	<string name="open_album">Abrir álbum</string>
+	<string name="turn_on_camera">Ligue a câmera</string>
+	<string name="expand_notification_bar">Expanda a barra de notificação:</string>
+	<string name="contraction_notification_bar">Encolher barra de notificação:</string>
+	<string name="language">Trocar de idioma</string>
 </resources>

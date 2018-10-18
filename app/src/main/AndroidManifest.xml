@@ -10,7 +10,6 @@
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
     <uses-permission android:name="android.permission.EXPAND_STATUS_BAR" />
     <uses-permission android:name="android.permission.VIBRATE" />
-
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <!-- android8.0未知来源应用安装权限 -->
@@ -40,17 +39,15 @@
             </intent-filter>
         </activity>
 
-
-        <service android:name=".service.MyService"></service>
+        <service android:name=".service.MyService" />
 
         <activity
             android:name="cn.finalteam.rxgalleryfinal.ui.activity.MediaActivity"
             android:exported="true" />
-
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait" />
-
+        <activity android:name=".view.activity.SwitchLanguageActivity"></activity>
     </application>
 
 </manifest>

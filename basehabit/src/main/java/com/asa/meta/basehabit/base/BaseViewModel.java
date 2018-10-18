@@ -18,7 +18,7 @@ import java.util.Map;
 public class BaseViewModel extends AndroidViewModel implements IBaseViewModel {
     public String TAG = getClass().getSimpleName();
     public UIContextLiveData ucLiveData = new UIContextLiveData();
-
+    public MutableLiveData<String> title = new MutableLiveData<>();
     public BaseViewModel(@NonNull Application application) {
         super(application);
     }
@@ -127,6 +127,9 @@ public class BaseViewModel extends AndroidViewModel implements IBaseViewModel {
         public MutableLiveData<Boolean> finishActivityLiveData = new MutableLiveData<>();
         public MutableLiveData<String> showDialog = new MutableLiveData<>();
         public MutableLiveData<String> hideDialog = new MutableLiveData<>();
+        public MutableLiveData<String> toolbarTitle = new MutableLiveData<>();
+
+
     }
 
 
