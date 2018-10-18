@@ -1,6 +1,5 @@
 package com.asa.meta.rxhttp.main;
 
-import android.app.Application;
 import android.content.Context;
 import android.text.TextUtils;
 
@@ -63,7 +62,7 @@ public final class RxHttp {
     private static final int DEFAULT_RETRY_COUNT = 3;                 //默认重试次数
     private static final int DEFAULT_RETRY_INCREASEDELAY = 0;         //默认重试叠加时间
     private static final int DEFAULT_RETRY_DELAY = 500;               //默认重试延时
-    private static Application sContext;
+    private static Context sContext;
     private volatile static RxHttp singleton = null;
     private Cache mCache = null;                                      //Okhttp缓存对象
     private CacheMode mCacheMode = CacheMode.NO_CACHE;                //缓存类型
@@ -93,7 +92,6 @@ public final class RxHttp {
     }
 
     public static RxHttp getInstance() {
-        testInitialize();
         if (singleton == null) {
             synchronized (RxHttp.class) {
                 if (singleton == null) {
@@ -107,7 +105,7 @@ public final class RxHttp {
     /**
      * 必须在全局Application先调用，获取context上下文，否则缓存无法使用
      */
-    public static void init(Application app) {
+    public static void init(Context app) {
         sContext = app;
     }
 

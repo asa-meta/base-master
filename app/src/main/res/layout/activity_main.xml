@@ -146,6 +146,7 @@
             </com.google.android.flexbox.FlexboxLayout>
 
             <ImageView
+                app:url="@{viewModel.phonePath}"
                 android:id="@+id/iv_test"
                 android:layout_width="@dimen/dp_140"
                 android:layout_height="@dimen/dp_140" />

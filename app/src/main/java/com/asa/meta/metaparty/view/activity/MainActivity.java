@@ -107,6 +107,7 @@ public class MainActivity extends LanguageActivity<ActivityMainBinding, MainView
         RxGalleryListener.getInstance().setRadioImageCheckedListener(new IRadioImageCheckedListener() {
             @Override
             public void cropAfter(Object t) {
+                viewModel.setPhonePath(t.toString());
                 Log.i(TAG, "cropAfter: " + t.toString());
             }
 
