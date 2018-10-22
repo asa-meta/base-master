@@ -12,6 +12,7 @@ ext {
     versions = [
             "support-version"  : "27.1.1",
             "lifecycle-version": "1.1.1",
+            "room-version": "1.0.0",
     ]
     //support配置
     support = [
@@ -57,6 +58,8 @@ ext {
             "lifecycle-extensions"                 : "android.arch.lifecycle:extensions:${versions["lifecycle-version"]}",
             "lifecycle-compiler"                   : "android.arch.lifecycle:compiler:${versions["lifecycle-version"]}",
             "lifecycle-reactivestreams"            : "android.arch.lifecycle:reactivestreams:${versions["lifecycle-version"]}",
+            "room"            : "android.arch.persistence.room:runtime:${versions["room-version"]}",
+            "room-compiler"            : "android.arch.persistence.room:compiler:${versions["room-version"]}",
             "flexbox"                              : "com.google.android:flexbox:1.0.0",
             //缓存
             "disklrucache"                         : "com.jakewharton:disklrucache:2.0.2",

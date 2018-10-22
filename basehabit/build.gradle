@@ -57,5 +57,7 @@ dependencies {
     api rootProject.ext.dependencies["bindingcollectionadapter"]
     api rootProject.ext.dependencies["bindingcollectionadapter-recyclerview"]
     annotationProcessor rootProject.ext.dependencies["lifecycle-compiler"]
+    api rootProject.ext.dependencies["room"]
+    annotationProcessor rootProject.ext.dependencies["room-compiler"]
     api project(path: ':helpers')
 }

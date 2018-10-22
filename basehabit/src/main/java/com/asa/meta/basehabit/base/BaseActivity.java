@@ -1,16 +1,21 @@
 package com.asa.meta.basehabit.base;
 
 import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModel;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentActivity;
 
 import com.asa.meta.helpers.toast.ToastUtils;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.Map;
 
 
@@ -44,7 +49,15 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
 
     public abstract int initVariableId();
 
-    public abstract VM initViewModel();
+    public static <T extends ViewModel> T createViewModel(FragmentActivity activity, Class<T> cls) {
+        return ViewModelProviders.of(activity).get(cls);
+    }
+
+    ;
+
+    public VM initViewModel() {
+        return null;
+    }
 
     @Override
     public void initView() {
@@ -52,8 +65,21 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
     }
 
     private void initViewDataBinding(Bundle savedInstanceState) {
+        viewModel = initViewModel();
+        if (viewModel == null) {
+            Class modelClass;
+            Type type = getClass().getGenericSuperclass();
+            if (type instanceof ParameterizedType) {
+                modelClass = (Class) ((ParameterizedType) type).getActualTypeArguments()[1];
+            } else {
+                //如果没有指定泛型参数，则默认使用BaseViewModel
+                modelClass = BaseViewModel.class;
+            }
+            viewModel = (VM) createViewModel(this, modelClass);
+        }
+        //DataBindingUtil类需要在project的build中配置 dataBinding {enabled true }, 同步后会自动关联android.databinding包
         binding = DataBindingUtil.setContentView(this, initContentView(savedInstanceState));
-        binding.setVariable(initVariableId(), viewModel = initViewModel());
+        binding.setVariable(initVariableId(), viewModel);
         binding.setLifecycleOwner(this);
         getLifecycle().addObserver(viewModel);
     }

@@ -22,24 +22,20 @@ public class SwitchLanguageModel extends BaseViewModel {
     public final ItemBinding<SwitchModel.LanguageBean> itemBinding = ItemBinding.of(BR.items, R.layout.item_switch_language);
     public MergeObservableList<Object> data = new MergeObservableList<>().insertItem("heard").insertList(items).insertItem("foot");
     public MutableLiveData<Integer> switchLanguage = new MutableLiveData<>();
-    public OnSwitchLanguageListenner listenner = new OnSwitchLanguageListenner() {
-        @Override
-        public void onClick(SwitchModel.LanguageBean content) {
-            showToast("类型：" + content.type + " ,内容" + content.language);
-            switchLanguage.setValue(content.type);
-        }
-    };
-    public final OnItemBind<Object> onItemBinding = new OnItemBind<Object>() {
-        @Override
-        public void onItemBind(ItemBinding itemBinding, int position, Object item) {
-            if (String.class.equals(item.getClass())) {
-                itemBinding.set(BR.items, R.layout.item_language_header);
-            } else if (SwitchModel.LanguageBean.class.equals(item.getClass())) {
-                itemBinding.set(BR.items, R.layout.item_switch_language).bindExtra(BR.listenner, listenner);
-            }
 
+    public OnSwitchLanguageListenner listenner = content -> {
+        showToast("类型：" + content.type + " ,内容" + content.language);
+        switchLanguage.setValue(content.type);
+    };
+
+    public final OnItemBind<Object> onItemBinding = (itemBinding, position, item) -> {
+        if (String.class.equals(item.getClass())) {
+            itemBinding.set(BR.items, R.layout.item_language_header);
+        } else if (SwitchModel.LanguageBean.class.equals(item.getClass())) {
+            itemBinding.set(BR.items, R.layout.item_switch_language).bindExtra(BR.listenner, listenner);
         }
     };
+
     SwitchModel model = new SwitchModel();
 
     public SwitchLanguageModel(@NonNull Application application) {

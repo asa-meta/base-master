@@ -1,8 +1,6 @@
 package com.asa.meta.metaparty.view.activity;
 
 import android.app.Activity;
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -36,11 +34,6 @@ public class MainActivity extends LanguageActivity<ActivityMainBinding, MainView
         return BR.viewModel;
     }
 
-    @Override
-    public MainViewModel initViewModel() {
-        return ViewModelProviders.of(this).get(MainViewModel.class);
-    }
-
     public static void reStart(Context context) {
         Intent intent = new Intent(context, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -51,42 +44,32 @@ public class MainActivity extends LanguageActivity<ActivityMainBinding, MainView
     public void initViewObservable() {
         super.initViewObservable();
 
-        viewModel.openGallery.observe(this, new Observer<Boolean>() {
+        viewModel.openGallery.observe(this, aBoolean -> openGallery());
+
+        viewModel.openCamera.observe(this, aBoolean -> SimpleRxGalleryFinal.get().init(new SimpleRxGalleryFinal.RxGalleryFinalCropListener() {
+
             @Override
-            public void onChanged(@Nullable Boolean aBoolean) {
-                openGallery();
+            public Activity getSimpleActivity() {
+                return MainActivity.this;
             }
-        });
 
-        viewModel.openCamera.observe(this, new Observer<Boolean>() {
             @Override
-            public void onChanged(@Nullable Boolean aBoolean) {
-                SimpleRxGalleryFinal.get().init(new SimpleRxGalleryFinal.RxGalleryFinalCropListener() {
-
-                    @Override
-                    public Activity getSimpleActivity() {
-                        return MainActivity.this;
-                    }
-
-                    @Override
-                    public void onCropCancel() {
-                        Log.i(TAG, "onCropCancel: ");
-                    }
-
-                    @Override
-                    public void onCropSuccess(@Nullable Uri uri) {
-                        Log.i(TAG, "onCropSuccess: " + uri.getPath());
-                        viewModel.setPhonePath(uri.getPath());
-                    }
-
-                    @Override
-                    public void onCropError(String errorMessage) {
-                        Log.i(TAG, "onCropError: " + errorMessage);
-                        viewModel.showToast(errorMessage);
-                    }
-                }).openCamera();
+            public void onCropCancel() {
+                Log.i(TAG, "onCropCancel: ");
             }
-        });
+
+            @Override
+            public void onCropSuccess(@Nullable Uri uri) {
+                Log.i(TAG, "onCropSuccess: " + uri.getPath());
+                viewModel.setPhonePath(uri.getPath());
+            }
+
+            @Override
+            public void onCropError(String errorMessage) {
+                Log.i(TAG, "onCropError: " + errorMessage);
+                viewModel.showToast(errorMessage);
+            }
+        }).openCamera());
     }
 
     @Override
@@ -131,6 +114,9 @@ public class MainActivity extends LanguageActivity<ActivityMainBinding, MainView
                 Log.i(TAG, "onEvent: " + imageRadioResultEvent.getResult().getOriginalPath());
             }
         });
+
+
     }
+
 
 }

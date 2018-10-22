@@ -23,6 +23,8 @@ public class LocalManageUtil {
         languageHashMap.put(3, "加拿大");
         languageHashMap.put(4, "葡萄牙");
         languageHashMap.put(5, "香港");
+        languageHashMap.put(6, "英语");
+        languageHashMap.put(7, "澳门");
     }
 
     /**
@@ -55,6 +57,11 @@ public class LocalManageUtil {
                 return new Locale("PT", "PT");
             case 5:
                 return new Locale("zh", "HK");
+            case 6:
+                return Locale.ENGLISH;
+            case 7:
+                return new Locale("zh", "MO");
+
             default:
                 return Locale.ENGLISH;
         }
