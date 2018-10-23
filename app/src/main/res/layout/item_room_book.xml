@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="items"
+            type="com.asa.meta.metaparty.data.bean.Book" />
+
+        <variable
+            name="listenner"
+            type="com.asa.meta.metaparty.viewmodel.SwitchLanguageModel.OnSwitchLanguageListenner" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="@dimen/dp_20"
+            android:text="@{items.bookName}"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold" />
+    </LinearLayout>
+</layout>

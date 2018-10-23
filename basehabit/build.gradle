@@ -57,7 +57,8 @@ dependencies {
     api rootProject.ext.dependencies["bindingcollectionadapter"]
     api rootProject.ext.dependencies["bindingcollectionadapter-recyclerview"]
     annotationProcessor rootProject.ext.dependencies["lifecycle-compiler"]
-    api rootProject.ext.dependencies["room"]
     annotationProcessor rootProject.ext.dependencies["room-compiler"]
+    api rootProject.ext.dependencies["room"]
+    api rootProject.ext.dependencies["room-rxjava2"]
     api project(path: ':helpers')
 }

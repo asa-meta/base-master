@@ -41,4 +41,5 @@ dependencies {
     api project(path: ':basehabit')
     api project(path: ':gallery')
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    annotationProcessor rootProject.ext.dependencies["room-compiler"]
 }

@@ -156,6 +156,13 @@
                     android:text="其他"
                     android:textAllCaps="false" />
 
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{()->viewModel.startRoomActivity()}"
+                    android:text="Room"
+                    android:textAllCaps="false" />
+
 
                 <TextView
                     android:id="@+id/showTextView"

@@ -47,7 +47,8 @@
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".view.activity.SwitchLanguageActivity"></activity>
+        <activity android:name=".view.activity.SwitchLanguageActivity" />
+        <activity android:name=".view.activity.RoomActivity"></activity>
     </application>
 
 </manifest>

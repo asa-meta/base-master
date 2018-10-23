@@ -17,6 +17,7 @@ import com.asa.meta.helpers.os.OSRomUtils;
 import com.asa.meta.metaparty.R;
 import com.asa.meta.metaparty.controller.NotifyController;
 import com.asa.meta.metaparty.model.MainModel;
+import com.asa.meta.metaparty.view.activity.RoomActivity;
 import com.asa.meta.metaparty.view.activity.SwitchLanguageActivity;
 import com.asa.meta.rxhttp.callback.DownloadProgressCallBack;
 import com.asa.meta.rxhttp.exception.ApiException;
@@ -52,6 +53,11 @@ public class MainViewModel extends BaseViewModel implements ProgressDialog {
         showTextView.setValue(getString(R.string.show_text));
         language.setValue(getApplication().getString(R.string.language));
         phoneDrawablePath.setValue(ContextCompat.getDrawable(getApplication(), R.drawable.logo));
+    }
+
+    //打开room页面
+    public void startRoomActivity() {
+        startActivity(RoomActivity.class);
     }
 
     //更换语言

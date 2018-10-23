@@ -60,6 +60,7 @@ ext {
             "lifecycle-reactivestreams"            : "android.arch.lifecycle:reactivestreams:${versions["lifecycle-version"]}",
             "room"            : "android.arch.persistence.room:runtime:${versions["room-version"]}",
             "room-compiler"            : "android.arch.persistence.room:compiler:${versions["room-version"]}",
+            "room-rxjava2"            : "android.arch.persistence.room:rxjava2:${versions["room-version"]}",
             "flexbox"                              : "com.google.android:flexbox:1.0.0",
             //缓存
             "disklrucache"                         : "com.jakewharton:disklrucache:2.0.2",

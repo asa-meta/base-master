@@ -31,7 +31,7 @@
             android:layout_height="match_parent"
             app:itemBinding="@{viewModel.onItemBinding}"
             app:items="@{viewModel.data}"
-            app:layoutManager="@{LayoutManagers.linear()}"
+            app:layoutManager="@{LayoutManagers.linear(1,true)}"
             tools:context=".view.activity.SwitchLanguageActivity" />
     </LinearLayout>
 
