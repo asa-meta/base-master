@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="viewModel"
             type="com.asa.meta.metaparty.viewmodel.SwitchLanguageModel" />
-
-        <import type="me.tatarka.bindingcollectionadapter2.LayoutManagers" />
     </data>
 
     <LinearLayout
@@ -25,13 +21,13 @@
             android:layout_height="@dimen/dp_56"
             app:title="@{viewModel.title}" />
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_language"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:itemBinding="@{viewModel.onItemBinding}"
             app:items="@{viewModel.data}"
-            app:layoutManager="@{LayoutManagers.linear(1,true)}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:context=".view.activity.SwitchLanguageActivity" />
     </LinearLayout>
 

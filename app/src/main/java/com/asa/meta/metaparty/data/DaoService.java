@@ -1,10 +1,10 @@
 package com.asa.meta.metaparty.data;
 
-import android.arch.lifecycle.LiveData;
-import android.arch.persistence.db.SupportSQLiteDatabase;
-import android.arch.persistence.room.Room;
-import android.arch.persistence.room.RoomDatabase;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
+import androidx.room.Room;
+import androidx.room.RoomDatabase;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.asa.meta.metaparty.application.BaseApplication;
 import com.asa.meta.metaparty.data.bean.Book;

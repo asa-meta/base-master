@@ -1,10 +1,11 @@
 package com.asa.meta.metaparty.viewmodel;
 
 import android.app.Application;
-import android.arch.lifecycle.MutableLiveData;
-import android.databinding.ObservableArrayList;
-import android.databinding.ObservableList;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
+import androidx.databinding.ObservableArrayList;
+import androidx.databinding.ObservableList;
+import androidx.lifecycle.MutableLiveData;
 
 import com.asa.meta.basehabit.base.BaseViewModel;
 import com.asa.meta.metaparty.BR;

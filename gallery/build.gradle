@@ -27,12 +27,9 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
-    implementation rootProject.ext.support["support-v4"]
-    implementation rootProject.ext.support["appcompat-v7"]
-    implementation rootProject.ext.support["recyclerview-v7"]
-    implementation rootProject.ext.support["design"]
     implementation rootProject.ext.support["exifinterface"]
-
+    implementation rootProject.ext.support["fragment"]
+    implementation rootProject.ext.support["recyclerview"]
     //rxjava
     implementation rootProject.ext.dependencies.rxjava
     implementation rootProject.ext.dependencies.rxandroid

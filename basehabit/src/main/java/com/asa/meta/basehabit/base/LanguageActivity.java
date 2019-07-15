@@ -1,7 +1,8 @@
 package com.asa.meta.basehabit.base;
 
 import android.content.Context;
-import android.databinding.ViewDataBinding;
+
+import androidx.databinding.ViewDataBinding;
 
 import com.asa.meta.helpers.language.LocalManageUtil;
 

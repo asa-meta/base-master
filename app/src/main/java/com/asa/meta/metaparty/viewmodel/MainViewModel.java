@@ -1,12 +1,13 @@
 package com.asa.meta.metaparty.viewmodel;
 
 import android.app.Application;
-import android.arch.lifecycle.MutableLiveData;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
 import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
+import androidx.lifecycle.MutableLiveData;
 
 import com.asa.meta.basehabit.base.BaseViewModel;
 import com.asa.meta.helpers.files.FileUtils;

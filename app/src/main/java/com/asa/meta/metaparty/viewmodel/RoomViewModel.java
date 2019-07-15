@@ -1,9 +1,10 @@
 package com.asa.meta.metaparty.viewmodel;
 
 import android.app.Application;
-import android.arch.lifecycle.LiveData;
-import android.support.annotation.NonNull;
 import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
 
 import com.asa.meta.basehabit.base.BaseViewModel;
 import com.asa.meta.metaparty.BR;

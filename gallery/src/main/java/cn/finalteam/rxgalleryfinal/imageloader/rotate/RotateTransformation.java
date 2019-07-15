@@ -3,7 +3,8 @@ package cn.finalteam.rxgalleryfinal.imageloader.rotate;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
@@ -18,7 +19,6 @@ public class RotateTransformation extends BitmapTransformation {
     private float rotateRotationAngle = 0f;
 
     public RotateTransformation(Context context, float rotateRotationAngle) {
-        super(context);
 
         this.rotateRotationAngle = rotateRotationAngle;
     }

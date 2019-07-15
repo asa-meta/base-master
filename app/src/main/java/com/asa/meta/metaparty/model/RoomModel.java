@@ -1,6 +1,6 @@
 package com.asa.meta.metaparty.model;
 
-import android.arch.lifecycle.LiveData;
+import androidx.lifecycle.LiveData;
 
 import com.asa.meta.metaparty.data.DaoService;
 import com.asa.meta.metaparty.data.bean.Book;
