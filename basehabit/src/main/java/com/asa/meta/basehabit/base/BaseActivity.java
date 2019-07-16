@@ -3,6 +3,8 @@ package com.asa.meta.basehabit.base;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MotionEvent;
 
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
@@ -191,6 +193,23 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
         startService(intent);
     }
 
+    @Override
+    protected void onUserLeaveHint() {
+        super.onUserLeaveHint();
+        Log.i(TAG, "Test onUserLeaveHint");
+    }
+
+    @Override
+    public void onUserInteraction() {
+        super.onUserInteraction();
+        Log.i(TAG, "Test onUserInteraction");
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        //  Log.i(TAG,"Test dispatchTouchEvent");
+        return super.dispatchTouchEvent(ev);
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

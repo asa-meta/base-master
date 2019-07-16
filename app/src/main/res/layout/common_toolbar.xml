@@ -4,10 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="title"
             type="String" />
+
+        <variable
+            name="viewModel"
+            type="com.asa.meta.basehabit.base.BaseViewModel" />
+
     </data>
 
     <androidx.appcompat.widget.Toolbar
@@ -28,6 +32,7 @@
                 android:layout_height="@dimen/dp_45"
                 android:layout_centerVertical="true"
                 android:padding="@dimen/dp_5"
+                android:onClick="@{()->viewModel.finishActivity()}"
                 android:src="@drawable/return_icon" />
 
             <TextView

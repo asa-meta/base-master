@@ -19,6 +19,7 @@
             layout="@layout/common_toolbar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_56"
+            app:viewModel="@{viewModel}"
             app:title="@{viewModel.title}" />
 
         <androidx.recyclerview.widget.RecyclerView

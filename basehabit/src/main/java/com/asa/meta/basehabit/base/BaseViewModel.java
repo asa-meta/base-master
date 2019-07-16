@@ -107,6 +107,10 @@ public class BaseViewModel extends AndroidViewModel implements IBaseViewModel {
         ucLiveData.showToastLiveData.postValue(s);
     }
 
+    public void finishActivity() {
+        ucLiveData.finishActivityLiveData.postValue(true);
+    }
+
     public String getString(int resId) {
         return getApplication().getString(resId);
     }
