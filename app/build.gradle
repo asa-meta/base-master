@@ -31,9 +31,13 @@ android {
 dependencies {
 
     implementation rootProject.ext.support["design"]
-    implementation rootProject.ext.dependencies["textdrawable"]
-
     implementation rootProject.ext.support["constraint-layout"]
+
+    implementation rootProject.ext.dependencies["textdrawable"]
+    implementation rootProject.ext.dependencies["work"]
+    implementation rootProject.ext.dependencies["work-rx"]
+
+
     annotationProcessor rootProject.ext.dependencies["room-compiler"]
 
     api project(path: ':basehabit')

@@ -12,4 +12,5 @@
     <string name="expand_notification_bar">展开通知栏:</string>
     <string name="contraction_notification_bar">收缩通知栏:</string>
     <string name="language">切换语言</string>
+    <string name="language_size">配置語言大小</string>
 </resources>

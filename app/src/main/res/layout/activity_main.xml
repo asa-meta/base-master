@@ -157,12 +157,19 @@
                     android:textAllCaps="false" />
 
                 <Button
+                    android:id="@+id/language_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{()->viewModel.changeTextSize()}"
+                    android:text="@string/language_size"
+                    android:textAllCaps="false" />
+
+                <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="@{()->viewModel.startRoomActivity()}"
                     android:text="Room"
                     android:textAllCaps="false" />
-
 
                 <TextView
                     android:id="@+id/showTextView"

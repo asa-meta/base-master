@@ -3,6 +3,7 @@ package com.asa.meta.basehabit.adapter.image;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 
 import androidx.databinding.BindingAdapter;
 
@@ -29,5 +30,10 @@ public final class ViewAdapter {
                 .apply(new RequestOptions().placeholder(placeholderRes))
                 .into(imageView);
 
+    }
+
+    @BindingAdapter(value = {"OnSeekBarChangeListener"}, requireAll = false)
+    public static void setSeekBarListener(SeekBar seekBar, SeekBar.OnSeekBarChangeListener OnSeekBarChangeListener) {
+        seekBar.setOnSeekBarChangeListener(OnSeekBarChangeListener);
     }
 }

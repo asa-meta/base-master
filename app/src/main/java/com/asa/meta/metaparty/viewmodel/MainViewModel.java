@@ -19,6 +19,7 @@ import com.asa.meta.metaparty.R;
 import com.asa.meta.metaparty.controller.NotifyController;
 import com.asa.meta.metaparty.model.MainModel;
 import com.asa.meta.metaparty.view.activity.RoomActivity;
+import com.asa.meta.metaparty.view.activity.SizeLanguageActivity;
 import com.asa.meta.metaparty.view.activity.SwitchLanguageActivity;
 import com.asa.meta.rxhttp.callback.DownloadProgressCallBack;
 import com.asa.meta.rxhttp.exception.ApiException;
@@ -199,6 +200,11 @@ public class MainViewModel extends BaseViewModel implements ProgressDialog {
     //甚至图片路径
     public void setPhonePath(String path) {
         phonePath.postValue(path);
+    }
+
+    //跳轉到改變字體大小
+    public void changeTextSize() {
+        startActivity(SizeLanguageActivity.class);
     }
 
     @Override

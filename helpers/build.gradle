@@ -25,7 +25,9 @@ dependencies {
     implementation rootProject.ext.support["constraint-layout"]
     implementation rootProject.ext.support["fragment"]
     implementation rootProject.ext.support["appcompat"]
-
+    implementation rootProject.ext.dependencies["gson"]
     implementation rootProject.ext.dependencies["flexbox"]
+    implementation rootProject.ext.dependencies["material"]
+    implementation 'androidx.annotation:annotation:1.1.0'
 
 }

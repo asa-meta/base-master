@@ -9,11 +9,15 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
-import com.asa.meta.basehabit.base.LanguageActivity;
+import com.asa.meta.basehabit.bus.RxBus;
 import com.asa.meta.metaparty.BR;
 import com.asa.meta.metaparty.R;
+import com.asa.meta.metaparty.controller.NotifyController;
 import com.asa.meta.metaparty.databinding.ActivityMainBinding;
+import com.asa.meta.metaparty.event.Logout;
+import com.asa.meta.metaparty.view.activity.base.ILogoutActivity;
 import com.asa.meta.metaparty.viewmodel.MainViewModel;
+import com.asa.meta.metaparty.worker.LogoutWorker;
 
 import cn.finalteam.rxgalleryfinal.RxGalleryFinalApi;
 import cn.finalteam.rxgalleryfinal.SimpleRxGalleryFinal;
@@ -23,7 +27,7 @@ import cn.finalteam.rxgalleryfinal.ui.RxGalleryListener;
 import cn.finalteam.rxgalleryfinal.ui.base.IMultiImageCheckedListener;
 import cn.finalteam.rxgalleryfinal.ui.base.IRadioImageCheckedListener;
 
-public class MainActivity extends LanguageActivity<ActivityMainBinding, MainViewModel> {
+public class MainActivity extends ILogoutActivity<ActivityMainBinding, MainViewModel> {
 
     @Override
     public int initContentView(Bundle savedInstanceState) {
@@ -39,6 +43,20 @@ public class MainActivity extends LanguageActivity<ActivityMainBinding, MainView
         Intent intent = new Intent(context, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
+    }
+
+    @Override
+    public void initData() {
+        super.initData();
+        LogoutWorker.start();
+
+        RxBus.getDefault().toObservable(Logout.class).subscribe(logout -> NotifyController.notifyTest2(mContext, "警告", "你長時間未活動，已退出登錄"));
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        LogoutWorker.finish();
     }
 
     @Override
@@ -76,6 +94,11 @@ public class MainActivity extends LanguageActivity<ActivityMainBinding, MainView
     @Override
     public void initView() {
         initGallery();
+        initTimer();
+    }
+
+    private void initTimer() {
+
     }
 
     private void initGallery() {

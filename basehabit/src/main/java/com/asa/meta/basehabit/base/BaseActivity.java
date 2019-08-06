@@ -2,8 +2,9 @@ package com.asa.meta.basehabit.base;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MotionEvent;
 
 import androidx.annotation.Nullable;
@@ -14,6 +15,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.asa.meta.helpers.language.LanguageSharePreferences;
 import com.asa.meta.helpers.toast.ToastUtils;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
@@ -28,12 +30,15 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
     public Context mContext;
 
     public String TAG = "";
+    private float fontSizeScale;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = this;
         TAG = getClass().getSimpleName();
+        fontSizeScale = LanguageSharePreferences.getInstance().getScale();
+
         initViewDataBinding(savedInstanceState);
         registerContextChange();
         initView();
@@ -193,17 +198,6 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
         startService(intent);
     }
 
-    @Override
-    protected void onUserLeaveHint() {
-        super.onUserLeaveHint();
-        Log.i(TAG, "Test onUserLeaveHint");
-    }
-
-    @Override
-    public void onUserInteraction() {
-        super.onUserInteraction();
-        Log.i(TAG, "Test onUserInteraction");
-    }
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
@@ -217,5 +211,16 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
         if (viewModel != null) {
             viewModel.onActivityResult(requestCode, resultCode, data);
         }
+    }
+
+    @Override
+    public Resources getResources() {
+        Resources res = super.getResources();
+        Configuration config = res.getConfiguration();
+        if (fontSizeScale > 0.5) {
+            config.fontScale = fontSizeScale;//1 设置正常字体大小的倍数
+        }
+        res.updateConfiguration(config, res.getDisplayMetrics());
+        return res;
     }
 }

@@ -12,4 +12,6 @@
 	<string name="expand_notification_bar">Expanda a barra de notificação:</string>
 	<string name="contraction_notification_bar">Encolher barra de notificação:</string>
 	<string name="language">Trocar de idioma</string>
+    <string name="language_size">配置語言大小(PT)</string>
+
 </resources>

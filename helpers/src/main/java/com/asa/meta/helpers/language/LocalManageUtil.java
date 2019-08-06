@@ -33,7 +33,7 @@ public class LocalManageUtil {
      * @return Locale对象
      */
     public static Locale getSystemLocale(Context context) {
-        return LanguageSharePreferences.getInstance(context).getSystemCurrentLocal();
+        return LanguageSharePreferences.getInstance().getSystemCurrentLocal();
     }
 
     /**
@@ -44,7 +44,7 @@ public class LocalManageUtil {
      */
     public static Locale getSetLanguageLocale(Context context) {
 
-        switch (LanguageSharePreferences.getInstance(context).getSelectLanguage()) {
+        switch (LanguageSharePreferences.getInstance().getSelectLanguage()) {
             case 0:
                 return getSystemLocale(context);
             case 1:
@@ -68,7 +68,7 @@ public class LocalManageUtil {
     }
 
     public static void saveSelectLanguage(Context context, int select) {
-        LanguageSharePreferences.getInstance(context).saveLanguage(select);
+        LanguageSharePreferences.getInstance().saveLanguage(select);
         setApplicationLanguage(context);
     }
 
@@ -118,7 +118,20 @@ public class LocalManageUtil {
             locale = Locale.getDefault();
         }
         Log.d(TAG, locale.getLanguage());
-        LanguageSharePreferences.getInstance(context).setSystemCurrentLocal(locale);
+        LanguageSharePreferences.getInstance().setSystemCurrentLocal(locale);
+    }
+
+    /**
+     * 获取Context应用语言
+     */
+    public static Locale getAppLocale(Context context) {
+        Locale local;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            local = context.getResources().getConfiguration().getLocales().get(0);
+        } else {
+            local = context.getResources().getConfiguration().locale;
+        }
+        return local;
     }
 
     public static void onConfigurationChanged(Context context) {

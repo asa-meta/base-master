@@ -49,6 +49,7 @@
             android:screenOrientation="portrait" />
         <activity android:name=".view.activity.SwitchLanguageActivity" />
         <activity android:name=".view.activity.RoomActivity"></activity>
+        <activity android:name=".view.activity.SizeLanguageActivity" />
     </application>
 
 </manifest>
