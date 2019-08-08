@@ -10,6 +10,7 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 
 import com.asa.meta.basehabit.bus.RxBus;
+import com.asa.meta.helpers.app.AppManager;
 import com.asa.meta.metaparty.BR;
 import com.asa.meta.metaparty.R;
 import com.asa.meta.metaparty.controller.NotifyController;
@@ -40,6 +41,7 @@ public class MainActivity extends ILogoutActivity<ActivityMainBinding, MainViewM
     }
 
     public static void reStart(Context context) {
+        AppManager.getAppManager().finishActivity();
         Intent intent = new Intent(context, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);

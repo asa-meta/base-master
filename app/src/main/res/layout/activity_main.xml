@@ -162,6 +162,7 @@
                     android:layout_height="wrap_content"
                     android:onClick="@{()->viewModel.changeTextSize()}"
                     android:text="@string/language_size"
+                    android:textSize="@dimen/sp_16"
                     android:textAllCaps="false" />
 
                 <Button

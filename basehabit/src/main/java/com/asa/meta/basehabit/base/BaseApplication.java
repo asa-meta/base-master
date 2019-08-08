@@ -5,7 +5,6 @@ import android.app.Application;
 import android.os.Bundle;
 
 import com.asa.meta.helpers.app.AppManager;
-import com.asa.meta.helpers.language.LocalManageUtil;
 
 public class BaseApplication extends Application {
     private static BaseApplication sInstance;
@@ -16,7 +15,6 @@ public class BaseApplication extends Application {
 
         @Override
         public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
-            LocalManageUtil.setLocal(activity);
             AppManager.getAppManager().addActivity(activity);
         }
 

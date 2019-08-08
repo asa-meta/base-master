@@ -8,6 +8,9 @@ import android.os.LocaleList;
 import android.util.DisplayMetrics;
 import android.util.Log;
 
+import androidx.core.os.ConfigurationCompat;
+import androidx.core.os.LocaleListCompat;
+
 import java.util.HashMap;
 import java.util.Locale;
 
@@ -33,7 +36,13 @@ public class LocalManageUtil {
      * @return Locale对象
      */
     public static Locale getSystemLocale(Context context) {
-        return LanguageSharePreferences.getInstance().getSystemCurrentLocal();
+        Locale locale = LanguageSharePreferences.getInstance().getSystemCurrentLocal();
+
+        if (locale == null) {
+            locale = getSystemLanguage().get(0);
+        }
+
+        return locale;
     }
 
     /**
@@ -77,6 +86,7 @@ public class LocalManageUtil {
     }
 
     private static Context updateResources(Context context, Locale locale) {
+        Log.d("updateResources", context.getClass().getSimpleName() + " ~Country:" + locale.getCountry() + " Language:" + locale.getLanguage());
         Locale.setDefault(locale);
 
         Resources res = context.getResources();
@@ -110,6 +120,13 @@ public class LocalManageUtil {
         resources.updateConfiguration(config, dm);
     }
 
+    public static void setConfig(Configuration config, Locale locale) {
+        config.locale = locale;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            config.setLocale(locale);
+        }
+    }
+
     public static void saveSystemCurrentLanguage(Context context) {
         Locale locale;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
@@ -132,6 +149,15 @@ public class LocalManageUtil {
             local = context.getResources().getConfiguration().locale;
         }
         return local;
+    }
+
+    /**
+     * 获取系统语言
+     */
+    public static LocaleListCompat getSystemLanguage() {
+        Configuration configuration = Resources.getSystem().getConfiguration();
+        LocaleListCompat locales = ConfigurationCompat.getLocales(configuration);
+        return locales;
     }
 
     public static void onConfigurationChanged(Context context) {

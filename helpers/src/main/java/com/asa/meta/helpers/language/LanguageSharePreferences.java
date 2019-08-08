@@ -16,7 +16,7 @@ public class LanguageSharePreferences {
     private final String TAG_SYSTEM_LANGUAGE = "system_language";
     private final SharedPreferences mSharedPreferences;
 
-    private Locale systemCurrentLocal = Locale.ENGLISH;
+    private Locale systemCurrentLocal = null;
 
 
     public LanguageSharePreferences() {

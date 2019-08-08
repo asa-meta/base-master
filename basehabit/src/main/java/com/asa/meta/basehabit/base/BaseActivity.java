@@ -16,11 +16,13 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.asa.meta.helpers.language.LanguageSharePreferences;
+import com.asa.meta.helpers.language.LocalManageUtil;
 import com.asa.meta.helpers.toast.ToastUtils;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.Locale;
 import java.util.Map;
 
 
@@ -32,10 +34,13 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
     public String TAG = "";
     private float fontSizeScale;
 
+    private Locale locale;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = this;
+        locale = LocalManageUtil.getSetLanguageLocale(mContext);
         TAG = getClass().getSimpleName();
         fontSizeScale = LanguageSharePreferences.getInstance().getScale();
 
@@ -217,9 +222,11 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
     public Resources getResources() {
         Resources res = super.getResources();
         Configuration config = res.getConfiguration();
-        if (fontSizeScale > 0.5) {
+        config.setToDefaults(); //使用默認的不受系統影響
+        if (fontSizeScale > 0) {
             config.fontScale = fontSizeScale;//1 设置正常字体大小的倍数
         }
+        LocalManageUtil.setConfig(config, locale);
         res.updateConfiguration(config, res.getDisplayMetrics());
         return res;
     }

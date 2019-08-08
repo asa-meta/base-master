@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MetaPartyMO</string>
+    <string name="title_activity_main">MainActivitMOy</string>
+
+    <string name="phone_info">手机版本MO信息：%s</string>
+    <string name="check_permission">点击检查通MO知权限</string>
+    <string name="downloding_apk">点击下载MO文件</string>
+    <string name="show_text">显示数据的MOview</string>
+    <string name="version_identification">版本MO识别</string>
+    <string name="open_album">打开图MO册</string>
+    <string name="turn_on_camera">打开相MO机</string>
+    <string name="expand_notification_bar">展开MO通知栏:</string>
+    <string name="contraction_notification_bar">收缩MO通知栏:</string>
+    <string name="language">切换语MO言</string>
+    <string name="language_size">配置語言大MO小</string>
+</resources>
