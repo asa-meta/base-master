@@ -11,10 +11,18 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.asa.meta.metaparty.view.fragment.HomeFragment"
-        android:label="HomeFragment" />
+        android:label="HomeFragment">
+        <action
+            android:id="@+id/action_homeFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/viewFragment"
         android:name="com.asa.meta.metaparty.view.fragment.ViewFragment"
         android:label="ViewFragment" />
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.asa.meta.metaparty.view.fragment.DetailFragment"
+        android:label="DetailFragment" />
 </navigation>

@@ -214,6 +214,10 @@ public class HomeFragmentViewModel extends BaseViewModel implements ProgressDial
         SimpleRxGalleryFinal.get().onActivityResult(requestCode, resultCode, data);
     }
 
+    public void startDetailFragment() {
+
+    }
+
     @Override
     public void showProgressDialog() {
 

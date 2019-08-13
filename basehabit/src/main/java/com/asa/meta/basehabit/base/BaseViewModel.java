@@ -103,6 +103,11 @@ public class BaseViewModel extends AndroidViewModel implements IBaseViewModel {
         ucLiveData.startServiceLiveData.postValue(params);
     }
 
+    public void startFragment() {
+        Map<String, Object> params = new HashMap();
+        ucLiveData.startFragmentByActionId.postValue(params);
+    }
+
     public void showToast(String s) {
         ucLiveData.showToastLiveData.postValue(s);
     }
@@ -123,10 +128,14 @@ public class BaseViewModel extends AndroidViewModel implements IBaseViewModel {
         //页面跳转,开启服务
         public static String CLASS = "CLASS";
         public static String BUNDLE = "BUNDLE";
+
+        //action id
+        public static String ACTION_ID = "CLASS";
     }
 
     public class UIContextLiveData extends LiveData {
         public MutableLiveData<Map<String, Object>> startActivityLiveData = new MutableLiveData<>();
+        public MutableLiveData<Map<String, Object>> startFragmentByActionId = new MutableLiveData<>();
         public MutableLiveData<Map<String, Object>> startServiceLiveData = new MutableLiveData<>();
         public MutableLiveData<String> showToastLiveData = new MutableLiveData<>();
         public MutableLiveData<Boolean> finishActivityLiveData = new MutableLiveData<>();

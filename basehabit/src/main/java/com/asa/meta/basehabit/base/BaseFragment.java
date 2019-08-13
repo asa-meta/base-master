@@ -2,6 +2,7 @@ package com.asa.meta.basehabit.base;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,19 +11,23 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.asa.meta.helpers.toast.ToastUtils;
 import com.trello.rxlifecycle2.components.support.RxFragment;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.Map;
 
 
 public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseViewModel> extends RxFragment implements IBaseActivity {
     protected V binding;
     protected VM viewModel;
     public String TAG = "";
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +41,8 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        Log.i(TAG, "onCreateView");
+
         viewModel = initViewModel();
         if (viewModel == null) {
             Class modelClass;
@@ -57,7 +64,7 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        registerContextChange();
         initData();
 
         initViewObservable();
@@ -83,12 +90,46 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
     }
 
 
-
     //刷新布局
     public void refreshLayout() {
         if (viewModel != null) {
             binding.setVariable(initVariableId(), viewModel);
         }
+    }
+
+    public void navigate(int resId, Bundle bundle) {
+        // Navigation.findNavController(getActivity()).navigate(resId,bundle);
+    }
+
+    private final void registerContextChange() {
+
+        viewModel.ucLiveData.showToastLiveData.observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(@Nullable String s) {
+                ToastUtils.showToast(s);
+            }
+        });
+
+        viewModel.ucLiveData.startFragmentByActionId.observe(this, new Observer<Map<String, Object>>() {
+            @Override
+            public void onChanged(Map<String, Object> stringObjectMap) {
+
+            }
+        });
+
+        viewModel.ucLiveData.startActivityLiveData.observe(this, new Observer<Map<String, Object>>() {
+            @Override
+            public void onChanged(@Nullable Map<String, Object> params) {
+                Class<?> clz = (Class<?>) params.get(BaseViewModel.ParameterField.CLASS);
+                Bundle bundle = null;
+
+                if (params.containsKey(BaseViewModel.ParameterField.BUNDLE)) {
+                    bundle = (Bundle) params.get(BaseViewModel.ParameterField.BUNDLE);
+                }
+
+                startActivity(clz, bundle);
+            }
+        });
     }
 
     public void startActivity(Class<?> clz) {

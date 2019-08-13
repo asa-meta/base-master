@@ -172,6 +172,14 @@
                     android:text="Room"
                     android:textAllCaps="false" />
 
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{()->viewModel.startDetailFragment()}"
+                    android:text="跳轉到detailFragment"
+                    android:textAllCaps="false" />
+
                 <TextView
                     android:id="@+id/showTextView"
                     android:layout_width="wrap_content"

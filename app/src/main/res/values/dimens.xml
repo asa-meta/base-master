@@ -2,8 +2,8 @@
     <dimen name="fab_margin">16dp</dimen>
 
     <!--BottomNavigationView 的选中没有选中的字体大小-->
-    <item name="design_bottom_navigation_text_size" type="dimen">@dimen/dp_10</item>
-    <item name="design_bottom_navigation_active_text_size" type="dimen">@dimen/dp_12</item>
+    <item name="design_bottom_navigation_text_size" type="dimen">@dimen/sp_14</item>
+    <item name="design_bottom_navigation_active_text_size" type="dimen">@dimen/sp_14</item>
     <item name="design_bottom_navigation_margin" type="dimen">@dimen/dp_5</item>
     <item name="design_bottom_navigation_height" type="dimen">@dimen/dp_56</item>
 
