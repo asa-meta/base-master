@@ -66,7 +66,6 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
         return ViewModelProviders.of(activity).get(cls);
     }
 
-    ;
 
     public VM initViewModel() {
         return null;

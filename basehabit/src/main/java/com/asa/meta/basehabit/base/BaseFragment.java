@@ -1,5 +1,6 @@
 package com.asa.meta.basehabit.base;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,8 +54,6 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
         return binding.getRoot();
     }
 
-    ;
-
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -90,6 +89,18 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
         if (viewModel != null) {
             binding.setVariable(initVariableId(), viewModel);
         }
+    }
+
+    public void startActivity(Class<?> clz) {
+        startActivity(new Intent(getActivity(), clz));
+    }
+
+    public void startActivity(Class<?> clz, Bundle bundle) {
+        Intent intent = new Intent(getActivity(), clz);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        startActivity(intent);
     }
 
     /**

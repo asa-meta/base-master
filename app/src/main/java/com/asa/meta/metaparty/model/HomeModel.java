@@ -5,10 +5,10 @@ import com.asa.meta.rxhttp.callback.DownloadProgressCallBack;
 import com.asa.meta.rxhttp.main.RxHttp;
 import com.asa.meta.rxhttp.subsciber.BaseSubscriber;
 
-public class MainModel {
+public class HomeModel {
     private String TAG = getClass().getSimpleName();
 
-    public MainModel() {
+    public HomeModel() {
     }
 
     public void loadVersionInfo(BaseSubscriber baseSubscriber) {
