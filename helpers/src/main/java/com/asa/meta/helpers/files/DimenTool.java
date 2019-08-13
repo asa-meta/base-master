@@ -26,6 +26,9 @@ public class DimenTool {
     public static ArrayList<FileInfoController> fileInfoControllers;
     public static DecimalFormat mFormat = new DecimalFormat("0.00");
 
+    private static final String metaPath = "./helpers/src/main/res/values/dimens.xml";
+    private static final String createPath = "./helpers/src/main/res/values-sw";
+
     public static void main(String[] args) {
         generate();
 //        start();
@@ -50,7 +53,7 @@ public class DimenTool {
 
 
     public static String appendFilePath(int smallWidthDp) {
-        return new StringBuilder().append("./helpers/src/main/res/values-sw").append(smallWidthDp).append("dp/dimens.xml").toString();
+        return new StringBuilder().append(createPath).append(smallWidthDp).append("dp/dimens.xml").toString();
     }
 
     private static void startText() {
@@ -75,7 +78,7 @@ public class DimenTool {
 
     public static void generate() {
         //以此文件夹下的dimens.xml文件内容为初始值参照
-        File file = new File("./helpers/src/main/res/values/dimens.xml");
+        File file = new File(metaPath);
 
         BufferedReader reader = null;
         initFileInfoControllers();

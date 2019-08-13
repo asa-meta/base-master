@@ -8,6 +8,10 @@ import android.os.Bundle;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.NavigationUI;
 
 import com.asa.meta.basehabit.bus.RxBus;
 import com.asa.meta.helpers.app.AppManager;
@@ -55,6 +59,12 @@ public class MainActivity extends ILogoutActivity<ActivityMainBinding, MainViewM
         RxBus.getDefault().toObservable(Logout.class).subscribe(logout -> NotifyController.notifyTest2(mContext, "警告", "你長時間未活動，已退出登錄"));
     }
 
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        return Navigation.findNavController(this, R.id.fragment_container).navigateUp();
+    }
+
     @Override
     public void finish() {
         super.finish();
@@ -95,13 +105,14 @@ public class MainActivity extends ILogoutActivity<ActivityMainBinding, MainViewM
 
     @Override
     public void initView() {
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+        NavController navController = navHostFragment.getNavController();
+        NavigationUI.setupWithNavController(binding.bottomNavigtionView, navController);
+
         initGallery();
-        initTimer();
-    }
-
-    private void initTimer() {
 
     }
+
 
     private void initGallery() {
         RxGalleryListener.getInstance().setRadioImageCheckedListener(new IRadioImageCheckedListener() {

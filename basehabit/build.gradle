@@ -51,6 +51,8 @@ dependencies {
     api rootProject.ext.dependencies["dagger-android"]
     api rootProject.ext.dependencies["lifecycle-extensions"]
     api rootProject.ext.dependencies["lifecycle-reactivestreams"]
+    api rootProject.ext.dependencies["navigation-fragment"]
+    api rootProject.ext.dependencies["navigation-ui"]
     api rootProject.ext.dependencies["bindingcollectionadapter"]
     api rootProject.ext.dependencies["bindingcollectionadapter-recyclerview"]
     annotationProcessor rootProject.ext.dependencies["lifecycle-compiler"]
