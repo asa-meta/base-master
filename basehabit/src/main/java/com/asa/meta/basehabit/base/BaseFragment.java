@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.NavController;
 
 import com.asa.meta.helpers.toast.ToastUtils;
 import com.trello.rxlifecycle2.components.support.RxFragment;
@@ -97,8 +98,12 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
         }
     }
 
+    public abstract NavController getNavController();
+
     public void navigate(int resId, Bundle bundle) {
-        // Navigation.findNavController(getActivity()).navigate(resId,bundle);
+        if (getNavController() != null) {
+            getNavController().navigate(resId, bundle);
+        }
     }
 
     private final void registerContextChange() {
@@ -112,8 +117,15 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
 
         viewModel.ucLiveData.startFragmentByActionId.observe(this, new Observer<Map<String, Object>>() {
             @Override
-            public void onChanged(Map<String, Object> stringObjectMap) {
+            public void onChanged(Map<String, Object> params) {
+                Bundle bundle = null;
+                int resId = (int) params.get(BaseViewModel.ParameterField.ACTION_ID);
 
+                if (params.containsKey(BaseViewModel.ParameterField.BUNDLE)) {
+                    bundle = (Bundle) params.get(BaseViewModel.ParameterField.BUNDLE);
+                }
+
+                navigate(resId, bundle);
             }
         });
 

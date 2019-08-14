@@ -1,10 +1,13 @@
 package com.asa.meta.metaparty.view.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.asa.meta.basehabit.BR;
 import com.asa.meta.basehabit.base.BaseFragment;
@@ -31,5 +34,20 @@ public class DetailFragment extends BaseFragment<FragmentDetailBinding, DetailFr
     @Override
     public void initView() {
 
+    }
+
+    @Override
+    public void initData() {
+        super.initData();
+        Bundle bundle = getArguments();
+
+        Log.i(TAG, bundle.getString("XXXX", "沒有數據"));
+
+
+    }
+
+    @Override
+    public NavController getNavController() {
+        return Navigation.findNavController(getActivity(), R.id.fragment_container);
     }
 }

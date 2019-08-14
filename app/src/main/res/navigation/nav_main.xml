@@ -24,5 +24,7 @@
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.asa.meta.metaparty.view.fragment.DetailFragment"
-        android:label="DetailFragment" />
+        android:label="DetailFragment">
+
+    </fragment>
 </navigation>

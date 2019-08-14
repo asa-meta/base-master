@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.asa.meta.basehabit.BR;
 import com.asa.meta.basehabit.base.BaseFragment;
@@ -13,6 +15,11 @@ import com.asa.meta.metaparty.databinding.FragmentApiBinding;
 import com.asa.meta.metaparty.viewmodel.ApiFragmentViewModel;
 
 public class ApiFragment extends BaseFragment<FragmentApiBinding, ApiFragmentViewModel> {
+    @Override
+    public NavController getNavController() {
+        return Navigation.findNavController(getActivity(), R.id.fragment_container);
+    }
+
     @Override
     public int initContentView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return R.layout.fragment_api;

@@ -103,8 +103,13 @@ public class BaseViewModel extends AndroidViewModel implements IBaseViewModel {
         ucLiveData.startServiceLiveData.postValue(params);
     }
 
-    public void startFragment() {
+    public void startFragmentById(int actionId, Bundle bundle) {
         Map<String, Object> params = new HashMap();
+        params.put(ParameterField.ACTION_ID, actionId);
+        if (bundle != null) {
+            params.put(ParameterField.BUNDLE, bundle);
+        }
+
         ucLiveData.startFragmentByActionId.postValue(params);
     }
 

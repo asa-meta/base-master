@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.asa.meta.basehabit.BR;
 import com.asa.meta.basehabit.base.BaseFragment;
@@ -31,5 +33,10 @@ public class ViewFragment extends BaseFragment<FragmentViewBinding, ViewFragment
     @Override
     public void initView() {
 
+    }
+
+    @Override
+    public NavController getNavController() {
+        return Navigation.findNavController(getActivity(), R.id.fragment_container);
     }
 }

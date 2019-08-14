@@ -3,6 +3,7 @@ package com.asa.meta.metaparty.viewmodel;
 import android.app.Application;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -215,7 +216,9 @@ public class HomeFragmentViewModel extends BaseViewModel implements ProgressDial
     }
 
     public void startDetailFragment() {
-
+        Bundle bundle = new Bundle();
+        bundle.putString("XXXX", "你好");
+        startFragmentById(R.id.action_homeFragment_to_detailFragment, bundle);
     }
 
     @Override
