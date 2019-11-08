@@ -73,6 +73,8 @@ public class HomeFragmentViewModel extends BaseViewModel implements ProgressDial
     //检查手机信息
     public void checkPhoneInfo() {
         showToast(getString(R.string.phone_info, OSRomUtils.getSystemInfo().toString()));
+
+
     }
 
     //展开通知栏

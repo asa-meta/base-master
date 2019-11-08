@@ -1,1 +1,1 @@
-include ':app', ':rxhttp', ':helpers', ':basehabit','gallery';
+include ':app', ':rxhttp', ':helpers', ':basehabit', ':jexcel','gallery';

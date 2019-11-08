@@ -15,5 +15,6 @@ public class BaseApplication extends com.asa.meta.basehabit.base.BaseApplication
                 .debug("Rxhttp", true)
                 .setBaseUrl(API.MAIN_URL);
         NotifyController.initChannel(this);
+
     }
 }
